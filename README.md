@@ -1,3 +1,4 @@
 # app_educacion_continua
 
-#git commit dummy
+git commit dummy
+App móvil para Educación Continua
