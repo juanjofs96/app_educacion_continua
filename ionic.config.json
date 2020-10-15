@@ -1,0 +1,7 @@
+{
+  "name": "educacion_contiunua",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
