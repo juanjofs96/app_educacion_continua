@@ -1,0 +1,42 @@
+<ion-content padding='true'>
+  <div class="vertical-center">
+    <img src="assets/images/LogoCEC.png" class="smallLogo" />
+  </div>
+  <ion-text color="primary" class="color-h3">
+    <h3>Crear Cuenta</h3>
+  </ion-text>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nombres</ion-label>
+        <ion-input autocomplete="on" type="email"><ion-icon name="accessibility-outline"></ion-icon></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Correo electrónico</ion-label>
+        <ion-input autocomplete="on" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Usuario</ion-label>
+        <ion-input autocomplete="off" type="text"><ion-icon name="person-outline"></ion-icon></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input autocomplete="off" type="password"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">N° Celular</ion-label>
+        <ion-input autocomplete="off" type="number"><ion-icon name="call-outline"></ion-icon></ion-input>
+      </ion-item>
+
+      <ion-item lines='none'>
+        ¿Ya tienes una cuenta? <a routerLink='/login'> Inicia Sesión</a>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" share="round" color="primary" class="ion-padding-horizontal">Registrar</ion-button>
+    <ion-button expand="block" share="round" color="medium" class="ion-padding-horizontal" routerLink="/login">Cancelar</ion-button>
+  </form>
+</ion-content>

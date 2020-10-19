@@ -1,0 +1,43 @@
+<ion-content>
+  <div class="vertical-center">
+    <img src="assets/images/LogoCEC.png" class="smallLogo" />
+  </div>
+  <ion-text color="primary" class="color-h3">
+    <h3>Iniciar Sesión</h3>
+  </ion-text>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Correo electrónico</ion-label>
+        <ion-input autocomplete="on" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input autocomplete="off" type="password"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <a routerLink="/signup">Recuperar contraseña</a>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" color="primary" class="ion-padding-horizontal">Iniciar Sesión</ion-button>
+  </form>
+
+  <!--header class="ion-padding-start ion-padding-top"></!--header-->
+  <ion-button expand="block" color="tertiary" class="ion-padding-horizontal">
+    <ion-icon slot="start" name="logo-facebook"></ion-icon>
+    Iniciar Sesión con Facebook
+  </ion-button>
+
+  <ion-button expand="block" color="danger" class="ion-padding-horizontal">
+    <ion-icon slot="start" name="logo-google"></ion-icon>
+    Iniciar Sesión con Google
+  </ion-button>
+
+  <section>
+    <header class="ion-padding-start ion-padding-top">¿Eres nuevo?</header>
+    <ion-button expand="block" color="primary" class="ion-padding-horizontal" routerLink="/signup">
+      Crear nueva cuenta</ion-button>
+  </section>
+</ion-content>
