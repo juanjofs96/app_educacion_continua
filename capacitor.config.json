@@ -1,0 +1,13 @@
+{
+    "appId": "com.edu.espol",
+    "appName": "app_educacion_continua",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "www",
+    "plugins": {
+        "SplashScreen": {
+            "launchShowDuration": 5
+        }
+    },
+    "cordova": {}
+}
