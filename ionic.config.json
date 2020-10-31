@@ -1,10 +1,14 @@
 {
   "name": "app_educacion_continua",
   "integrations": {
+<<<<<<< HEAD
     "capacitor": {
       "enabled": false
     },
     "cordova": {}
+=======
+    "capacitor": {}
+>>>>>>> abbd9cce865d4cc4064fc8b83ea0df99640fd7bc
   },
   "type": "angular"
 }

@@ -16,12 +16,20 @@ export class AppComponent {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+<<<<<<< HEAD
     
+=======
+>>>>>>> abbd9cce865d4cc4064fc8b83ea0df99640fd7bc
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+<<<<<<< HEAD
     this.statusBar.styleDefault();
+=======
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+>>>>>>> abbd9cce865d4cc4064fc8b83ea0df99640fd7bc
     });
   }
 }
