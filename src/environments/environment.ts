@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false
-<<<<<<< HEAD
 
 };
 
@@ -19,10 +18,6 @@ export const firebaseConfig = {
   measurementId: "G-GS6NW3RMT5"
 }
 
-=======
-};
-
->>>>>>> abbd9cce865d4cc4064fc8b83ea0df99640fd7bc
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
