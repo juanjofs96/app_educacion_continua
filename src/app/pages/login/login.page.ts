@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -7,8 +6,6 @@ import * as firebase from 'firebase/app';
 import { Platform } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-=======
->>>>>>> abbd9cce865d4cc4064fc8b83ea0df99640fd7bc
 
 @Component({
   selector: 'app-login',
@@ -16,7 +13,6 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-<<<<<<< HEAD
   loading: any;
   constructor(
     private router: Router,
@@ -114,12 +110,3 @@ export class LoginPage implements OnInit {
   }
 }
 
-=======
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
->>>>>>> abbd9cce865d4cc4064fc8b83ea0df99640fd7bc
