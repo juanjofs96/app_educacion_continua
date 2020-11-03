@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { AppComponent} from "../app.component";
+import { AppComponent } from "../app.component";
 
 @Component({
   selector: 'app-tabs',
@@ -10,25 +10,28 @@ import { AppComponent} from "../app.component";
 })
 
 export class TabsPage {
-  private listTabs:any;
+  private listTabs: any;
   constructor(private alertController: AlertController,
-    private router: Router,private App: AppComponent) {
-      this.listTabs=this.App.listTabs;
+    private router: Router, private App: AppComponent) {
+    this.listTabs = this.App.listTabs;
   }
 
-  verificar(index:number){
-    if(this.listTabs[index].disable) this.alertLogin();
+  verificar(index: number) {
+    if (this.listTabs[index].disable) this.alertLogin();
   }
 
   async alertLogin() {
     const alert = await this.alertController.create({
-      header: 'Registrese o inicie sesión',
-      message: 'Desea registrarse o iniciar sesión',
-      buttons: ['NO', {
-        text: 'SI', handler: () => {
-          this.router.navigate(["/login"]);
-        }
-      }]
+      header: 'Para continuar regístrese o inicie sesión',
+      message: '¿Desea registrarse o iniciar sesión?',
+      backdropDismiss: false,
+      buttons: [{text: 'NO', handler: () => {
+        this.router.navigate(["/educ/home/"]);
+      }}, {
+          text: 'SI', handler: () => {
+            this.router.navigate(["/login"]);
+          }
+        }]
     });
     await alert.present();
   }
