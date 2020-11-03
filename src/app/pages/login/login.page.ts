@@ -108,6 +108,7 @@ export class LoginPage implements OnInit {
 
 
   habilitarOpciones(){
+    this.App.estadoUser=true;
     for (let i=0;i<this.App.listMenu.length;i++){
       this.App.listMenu[i].disable=false;
     }

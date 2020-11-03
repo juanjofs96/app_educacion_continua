@@ -18,6 +18,7 @@ export class AppComponent {
   public listTabs = [{ item: "Home", disable: false, tab: "home", icon: "home" }, { item: "Mis Cursos", disable: true, tab: "cursos", icon: "school" },
   { item: "Notificaciones", disable: true, tab: "notificaciones", icon: "notifications" },
   { item: "Encuestas", disable: true, tab: "encuestas", icon: "bar-chart" }];
+  public estadoUser:boolean;
 
 constructor(
   private alertController: AlertController,
@@ -27,10 +28,12 @@ constructor(
   private statusBar: StatusBar,
   private menu: MenuController,
 ) {
+  
   this.initializeApp();
 }
 
 initializeApp() {
+  this.estadoUser=false;
   this.platform.ready().then(() => {
   this.statusBar.styleDefault();
   });
@@ -55,9 +58,8 @@ async alertLogin() {
 }
 
 salir(){
-  this.platform.backButton.subscribe(()=>{
-    navigator['app'].exitApp();
-    });
+  this.router.navigate(["/login"]);
+  this.estadoUser=false;
 }
 
 }

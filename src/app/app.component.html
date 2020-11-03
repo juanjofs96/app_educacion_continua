@@ -17,16 +17,16 @@
           </ion-item>
         </ion-list>
       </ion-content>
-      <IonFooter>
-        <IonToolbar>
+      <ion-footer *ngIf="estadoUser">
+        <ion-toolbar>
             <ion-item>
-            <ion-button fill="clear" size="medium" (click)="salir()">
+            <ion-button hide="estadoUser" fill="clear" size="medium" (click)="salir()">
               <ion-icon name="exit" slot="start"></ion-icon>
               Salir
             </ion-button>
             </ion-item>
-        </IonToolbar>
-      </IonFooter>
+        </ion-toolbar>
+      </ion-footer>
     </ion-menu>
 
     <!-- the main content -->
