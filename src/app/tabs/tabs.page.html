@@ -1,24 +1,9 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
-      <ion-icon name="home"></ion-icon>
-      <ion-label>Home</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="cursos">
-      <ion-icon name="school"></ion-icon>
-      <ion-label>Mis Cursos</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="notificaciones">
-      <ion-icon name="notifications"></ion-icon>
-      <ion-label>Notificaciones</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="encuestas">
-      <ion-icon name="bar-chart"></ion-icon>
-      <ion-label>Encuestas</ion-label>
+    <ion-tab-button (click)="verificar(i)" *ngFor="let list of listTabs;let i = index" [attr.data-index]="i" tab="{{list.tab}}">
+      <ion-icon name="{{list.icon}}"></ion-icon>
+      <ion-label>{{list.item}}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

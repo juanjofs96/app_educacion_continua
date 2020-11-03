@@ -14,6 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { firebaseConfig } from '../environments/environment';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { TabsPage } from './tabs/tabs.page';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { Facebook } from '@ionic-native/facebook/ngx';
     SplashScreen,
     GooglePlus,
     Facebook,
+    TabsPage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

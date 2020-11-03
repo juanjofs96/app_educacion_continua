@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 import { Platform } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-login',
@@ -20,9 +21,10 @@ export class LoginPage implements OnInit {
     private google: GooglePlus,
     public loadingController: LoadingController,
     private fireAuth: AngularFireAuth,
-    private fb: Facebook
+    private fb: Facebook,
+    private App: AppComponent,
   ) {
-
+      
   }
 
   async ngOnInit() {
@@ -61,7 +63,6 @@ export class LoginPage implements OnInit {
 
 
   loginFacebook() {
-
     if (this.platform.is('android')) {
       this.loginFacebookAndroid();
     } else {
@@ -72,26 +73,22 @@ export class LoginPage implements OnInit {
   async loginGoogleWeb() {
     const res = await this.fireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     const user = res.user;
-    console.log(user);
-    this.router.navigate(["/educ/home/"]);
+    this.habilitarOpciones();
   }
 
   async loginFacebookAndroid() {
-
     const res: FacebookLoginResponse = await this.fb.login(['public_profile', 'email']);
     const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
     const resConfirmed = await this.fireAuth.auth.signInWithCredential(facebookCredential);
     const user = resConfirmed.user;
-    this.router.navigate(["/educ/home/"]);
+    this.habilitarOpciones();
 
   }
 
   async loginFacebookWeb() {
     const res = await this.fireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
     const user = res.user;
-    console.log(user);
-    this.router.navigate(["/educ/home/"]);
-
+    this.habilitarOpciones();
   }
 
   onLoginSuccess(accessToken, accessSecret) {
@@ -100,7 +97,7 @@ export class LoginPage implements OnInit {
         .credential(accessToken);
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
-        this.router.navigate(["/educ/home/"]);
+        this.habilitarOpciones();
         this.loading.dismiss();
       })
 
@@ -108,5 +105,18 @@ export class LoginPage implements OnInit {
   onLoginError(err) {
     console.log(err);
   }
+
+
+  habilitarOpciones(){
+    for (let i=0;i<this.App.listMenu.length;i++){
+      this.App.listMenu[i].disable=false;
+    }
+
+    for (let i=0;i<this.App.listTabs.length;i++){
+      this.App.listTabs[i].disable=false;
+    }
+    this.router.navigate(["/educ/home/"]);
+  }
+
 }
 

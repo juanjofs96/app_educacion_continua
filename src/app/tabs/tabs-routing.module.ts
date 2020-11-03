@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../encuestas/encuestas.module').then(m => m.EncuestasPageModule)
       },
       {
+        path: 'contacto',
+        loadChildren: () => import('../contacto/contacto.module').then(m => m.ContactoPageModule)
+      },
+      {
         path: '',
         redirectTo: '/educ/home',
         pathMatch: 'full'
