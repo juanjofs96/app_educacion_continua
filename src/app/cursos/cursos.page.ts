@@ -11,11 +11,9 @@ export class CursosPage implements OnInit {
   private listCursos =[]
   
   constructor() { }
-
   ngOnInit() {
     this.getCursos();
   }
-
   getCursos() {
     var self = this;
     $.getJSON( "https://prueba-63695.firebaseio.com/cursos.json", function(data) {
