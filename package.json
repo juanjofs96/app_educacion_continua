@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "-": "0.0.1",
     "@angular/common": "~10.0.0",
     "@angular/core": "~10.0.0",
     "@angular/forms": "~10.0.0",
@@ -30,7 +31,9 @@
     "cordova-browser": "6.0.0",
     "cordova-plugin-splashscreen": "^6.0.0",
     "firestore": "^1.1.6",
+    "jquery": "^3.5.1",
     "rxjs": "~6.5.5",
+    "save": "^2.4.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
@@ -46,6 +49,7 @@
     "@ionic/lab": "3.2.9",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jquery": "^3.5.4",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "cordova-plugin-device": "^2.0.2",

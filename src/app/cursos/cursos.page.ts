@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from "jquery";
 
 @Component({
   selector: 'app-cursos',
@@ -7,13 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CursosPage implements OnInit {
 
-  private listCursos=[{titulo:"Ofimática Básica",imagen:"https://static1.abc.es/media/tecnologia/2020/02/25/excel-kbVE--620x349@abc.jpg",fecha:"Noviembre 2,2020",estado:"Finalizado"},
-  {titulo:"Ofimática Básica",imagen:"https://static1.abc.es/media/tecnologia/2020/02/25/excel-kbVE--620x349@abc.jpg",fecha:"Noviembre 2,2020",estado:"Finalizado"},
-  {titulo:"Ofimática Básica",imagen:"https://static1.abc.es/media/tecnologia/2020/02/25/excel-kbVE--620x349@abc.jpg",fecha:"Noviembre 2,2020",estado:"Finalizado"},
-  {titulo:"Ofimática Básica",imagen:"https://static1.abc.es/media/tecnologia/2020/02/25/excel-kbVE--620x349@abc.jpg",fecha:"Noviembre 2,2020",estado:"Finalizado"}]
+  private listCursos =[]
+  
   constructor() { }
 
   ngOnInit() {
+    this.getCursos();
+  }
+
+  getCursos() {
+    var self = this;
+    $.getJSON( "https://prueba-63695.firebaseio.com/cursos.json", function(data) {
+      self.listCursos=data;
+    })
   }
 
 }
