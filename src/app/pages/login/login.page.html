@@ -9,19 +9,19 @@
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Correo electrónico</ion-label>
-        <ion-input autocomplete="on" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="email" name="correo" autocomplete="on" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input autocomplete="off" type="password"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="pass" autocomplete="off" name="clave" type="password"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <a routerLink="/signup">Recuperar contraseña</a>
+        <a routerLink="/educ/home/">No iniciar sesión</a>
       </ion-item>
     </ion-list>
-    <ion-button expand="block" color="primary" class="ion-padding-horizontal" routerLink="/educ/home">Iniciar Sesión</ion-button>
+    <ion-button expand="block" color="primary" class="ion-padding-horizontal" (click)="login()">Iniciar Sesión</ion-button>
   </form>
 
   <!--header class="ion-padding-start ion-padding-top"></!--header-->

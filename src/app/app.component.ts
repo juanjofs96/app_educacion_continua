@@ -19,6 +19,7 @@ export class AppComponent {
   { item: "Notificaciones", disable: true, tab: "notificaciones", icon: "notifications" },
   { item: "Encuestas", disable: true, tab: "encuestas", icon: "bar-chart" }];
   public estadoUser: boolean;
+  public id_User:string;
 
   constructor(
     private alertController: AlertController,
@@ -67,6 +68,7 @@ export class AppComponent {
   salir() {
     this.router.navigate(["/login"]);
     this.estadoUser = false;
+    this.id_User=null;
     for (let i = 0; i < this.listMenu.length; i++) {
       i == 3 ? this.listMenu[i].disable = false : this.listMenu[i].disable = true;
     }

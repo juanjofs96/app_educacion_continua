@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -6,15 +6,20 @@ import * as firebase from 'firebase/app';
 import { Platform } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-import { AppComponent} from "../../app.component";
+import { AppComponent } from "../../app.component";
+import * as $ from "jquery";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
+
 export class LoginPage implements OnInit {
   loading: any;
+  public id_user: string;
+  private email: string = "";
+  private pass: string = "";
   constructor(
     private router: Router,
     private platform: Platform,
@@ -24,7 +29,7 @@ export class LoginPage implements OnInit {
     private fb: Facebook,
     private App: AppComponent,
   ) {
-      
+
   }
 
   async ngOnInit() {
@@ -38,6 +43,18 @@ export class LoginPage implements OnInit {
     await loading.present();
   }
 
+  async login() {
+    console.log(this.email + "_" + this.pass)
+    var self = this;
+    await $.getJSON("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
+      for (let i = 0; i < data_users.length; i++) {
+        if (data_users[i].email == self.email && data_users[i].pass == self.pass) {
+          self.id_user = data_users[i].id_user;
+          self.habilitarOpciones();
+        }
+      }
+    });
+  }
 
   async loginGoogle() {
     let params;
@@ -57,7 +74,6 @@ export class LoginPage implements OnInit {
     }
     else {
       this.loginGoogleWeb();
-
     }
   }
 
@@ -82,7 +98,6 @@ export class LoginPage implements OnInit {
     const resConfirmed = await this.fireAuth.auth.signInWithCredential(facebookCredential);
     const user = resConfirmed.user;
     this.habilitarOpciones();
-
   }
 
   async loginFacebookWeb() {
@@ -100,21 +115,21 @@ export class LoginPage implements OnInit {
         this.habilitarOpciones();
         this.loading.dismiss();
       })
-
   }
   onLoginError(err) {
     console.log(err);
   }
 
 
-  habilitarOpciones(){
-    this.App.estadoUser=true;
-    for (let i=0;i<this.App.listMenu.length;i++){
-      this.App.listMenu[i].disable=false;
+  habilitarOpciones() {
+    this.App.estadoUser = true;
+    this.App.id_User = this.id_user;
+    for (let i = 0; i < this.App.listMenu.length; i++) {
+      this.App.listMenu[i].disable = false;
     }
 
-    for (let i=0;i<this.App.listTabs.length;i++){
-      this.App.listTabs[i].disable=false;
+    for (let i = 0; i < this.App.listTabs.length; i++) {
+      this.App.listTabs[i].disable = false;
     }
     this.router.navigate(["/educ/home/"]);
   }
