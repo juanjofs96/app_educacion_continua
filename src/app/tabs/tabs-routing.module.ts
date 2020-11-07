@@ -13,7 +13,15 @@ const routes: Routes = [
       },
       {
         path: 'cursos',
-        loadChildren: () => import('../cursos/cursos.module').then(m => m.CursosPageModule)
+        children: [{
+          path: "",
+          loadChildren: () => import('../cursos/cursos.module').then(m => m.CursosPageModule),
+        },
+        {
+          path: ':id_curso',
+          loadChildren: () => import('../detalle-curso/detalle-curso.module').then(m => m.DetalleCursoPageModule)
+        }]
+
       },
       {
         path: 'notificaciones',
@@ -45,4 +53,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

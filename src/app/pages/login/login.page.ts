@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
     await $.getJSON("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
       for (let i = 0; i < data_users.length; i++) {
         if (data_users[i].email == self.email && data_users[i].pass == self.pass) {
-          self.id_user = data_users[i].id_user;
+          self.App.id_User = data_users[i].id_user;
           self.habilitarOpciones();
         }
       }
@@ -123,7 +123,6 @@ export class LoginPage implements OnInit {
 
   habilitarOpciones() {
     this.App.estadoUser = true;
-    this.App.id_User = this.id_user;
     for (let i = 0; i < this.App.listMenu.length; i++) {
       this.App.listMenu[i].disable = false;
     }

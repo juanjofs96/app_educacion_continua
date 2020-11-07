@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery";
 import { AppComponent } from '../app.component';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cursos',
@@ -11,16 +12,17 @@ import { AlertController } from '@ionic/angular';
 export class CursosPage {
 
   private listCursos = []
-  private find;
-  constructor(private App: AppComponent, private alertController: AlertController) {
-    console.log("id_user " + this.App.id_User);
+  private find:boolean;
+  constructor(private App: AppComponent, private alertController: AlertController,private router:Router) {
+    
   }
 
   ionViewDidEnter() {
     this.listCursos = []
     this.find=false;
-    this.getCursos();
-   
+    if(this.App.id_User!=null) {
+      this.getCursos();
+    }
   }
   async getCursos() {
     var self = this;

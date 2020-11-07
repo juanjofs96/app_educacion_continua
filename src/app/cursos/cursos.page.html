@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let list of listCursos">
+    <ion-item *ngFor="let list of listCursos" [routerLink]="['/educ/cursos',list.id_curso]">
       <ion-avatar slot="start">
         <ion-img [src]="list.imagen"></ion-img>
       </ion-avatar>
