@@ -57,7 +57,22 @@ export class LoginPage implements OnInit {
           break;
         }
       }
-      if (self.noExiste) self.alertError();
+      if (self.noExiste) self.alertError("Su correo o contraseña son incorrectos");
+    });
+  }
+
+  async verificarCuenta(user:any) {
+    var self = this;
+    await $.getJSON("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
+      for (let i = 0; i < data_users.length; i++) {
+        if (data_users[i].email == user) {
+          self.noExiste = false;
+          self.App.id_User = data_users[i].id_user;
+          self.habilitarOpciones();
+          break;
+        }
+      }
+      if (self.noExiste) self.alertError("No se encuentra registrado");
     });
   }
 
@@ -93,22 +108,22 @@ export class LoginPage implements OnInit {
 
   async loginGoogleWeb() {
     const res = await this.fireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    const user = res.user;
-    this.habilitarOpciones();
+    const email = res.user.email;
+    this.verificarCuenta(email);
   }
 
   async loginFacebookAndroid() {
     const res: FacebookLoginResponse = await this.fb.login(['public_profile', 'email']);
     const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
     const resConfirmed = await this.fireAuth.auth.signInWithCredential(facebookCredential);
-    const user = resConfirmed.user;
-    this.habilitarOpciones();
+    const email = resConfirmed.user.email;
+    this.verificarCuenta(email);
   }
 
   async loginFacebookWeb() {
     const res = await this.fireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-    const user = res.user;
-    this.habilitarOpciones();
+    const email = res.user.email;
+    this.verificarCuenta(email);
   }
 
   onLoginSuccess(accessToken, accessSecret) {
@@ -117,7 +132,8 @@ export class LoginPage implements OnInit {
         .credential(accessToken);
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
-        this.habilitarOpciones();
+        const email = response.user.email;
+        this.verificarCuenta(email);
         this.loading.dismiss();
       })
   }
@@ -138,11 +154,11 @@ export class LoginPage implements OnInit {
     this.router.navigate(["/educ/home/"]);
   }
 
-  async alertError() {
+  async alertError(msg:string) {
     const alert = await this.alertController.create({
       header: 'Mensaje',
       subHeader: 'Credenciales incorrectas',
-      message: 'Su correo o contraseña son incorrectos',
+      message: msg,
       buttons: ['OK']
     });
 
