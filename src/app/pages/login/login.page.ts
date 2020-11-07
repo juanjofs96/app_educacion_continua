@@ -8,6 +8,7 @@ import { LoadingController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { AppComponent } from "../../app.component";
 import * as $ from "jquery";
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginPage implements OnInit {
   public id_user: string;
   private email: string = "";
   private pass: string = "";
+  private noExiste: boolean;
   constructor(
     private router: Router,
     private platform: Platform,
@@ -28,8 +30,9 @@ export class LoginPage implements OnInit {
     private fireAuth: AngularFireAuth,
     private fb: Facebook,
     private App: AppComponent,
+    private alertController: AlertController
   ) {
-
+    this.noExiste = true;
   }
 
   async ngOnInit() {
@@ -44,15 +47,17 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    console.log(this.email + "_" + this.pass)
     var self = this;
     await $.getJSON("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
       for (let i = 0; i < data_users.length; i++) {
         if (data_users[i].email == self.email && data_users[i].pass == self.pass) {
+          self.noExiste = false;
           self.App.id_User = data_users[i].id_user;
           self.habilitarOpciones();
+          break;
         }
       }
+      if (self.noExiste) self.alertError();
     });
   }
 
@@ -131,6 +136,17 @@ export class LoginPage implements OnInit {
       this.App.listTabs[i].disable = false;
     }
     this.router.navigate(["/educ/home/"]);
+  }
+
+  async alertError() {
+    const alert = await this.alertController.create({
+      header: 'Mensaje',
+      subHeader: 'Credenciales incorrectas',
+      message: 'Su correo o contraseña son incorrectos',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 }
