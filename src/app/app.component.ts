@@ -69,6 +69,7 @@ export class AppComponent {
     this.router.navigate(["/login"]);
     this.estadoUser = false;
     this.id_User=null;
+    this.menu.close();
     for (let i = 0; i < this.listMenu.length; i++) {
       i == 3 ? this.listMenu[i].disable = false : this.listMenu[i].disable = true;
     }

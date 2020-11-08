@@ -133,7 +133,27 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-app>\n  <ion-split-pane contentId=\"main\">\n  <!--  the side menu  -->\n  <ion-menu contentId=\"main\">\n    <ion-header>\n      <ion-toolbar>\n        <ion-title>Menu</ion-title>\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-list>\n        <ion-item>Curso Aprobados</ion-item>\n        <ion-item>Descargar Diplomas</ion-item>\n        <ion-item>Sugerencias y Reclamos</ion-item>\n        <ion-item>Contáctenos</ion-item>\n        <ion-item>Perfil</ion-item>\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n\n  <!-- the main content -->\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\n</ion-split-pane>\n  \n</ion-app>\n";
+      __webpack_exports__["default"] = "<ion-app>\n  <ion-split-pane contentId=\"main\">\n    <!--  the side menu  -->\n    <ion-menu contentId=\"main\" menuId=\"menu_lateral\">\n      <ion-header>\n        <ion-toolbar class=\"toolhead\">\n          <ion-buttons slot=\"start\">\n            <ion-menu-button></ion-menu-button>\n          </ion-buttons>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-item *ngFor=\"let list of listMenu;let i = index\" [attr.data-index]=\"i\">\n            <ion-button fill=\"clear\" (click)=\"verificar(i)\">{{list.item}}</ion-button>\n          </ion-item>\n        </ion-list>\n      </ion-content>\n      <ion-footer *ngIf=\"estadoUser\">\n        <ion-toolbar>\n            <ion-item>\n            <ion-button hide=\"estadoUser\" fill=\"clear\" size=\"medium\" (click)=\"salir()\">\n              <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\n              Salir\n            </ion-button>\n            </ion-item>\n        </ion-toolbar>\n      </ion-footer>\n    </ion-menu>\n\n    <!-- the main content -->\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\n  </ion-split-pane>\n\n</ion-app>";
+      /***/
+    },
+
+    /***/
+    "./node_modules/raw-loader/dist/cjs.js!./src/app/tabs/tabs.page.html":
+    /*!***************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/tabs/tabs.page.html ***!
+      \***************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function node_modulesRawLoaderDistCjsJsSrcAppTabsTabsPageHtml(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button (click)=\"verificar(i)\" *ngFor=\"let list of listTabs;let i = index\" [attr.data-index]=\"i\" tab=\"{{list.tab}}\">\n      <ion-icon name=\"{{list.icon}}\"></ion-icon>\n      <ion-label>{{list.item}}</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
       /***/
     },
 
@@ -177,7 +197,7 @@
 
       var routes = [{
         path: "",
-        redirectTo: "login",
+        redirectTo: "/educ/home",
         pathMatch: "full"
       }, {
         path: '',
@@ -215,9 +235,9 @@
       }, {
         path: 'cursos',
         loadChildren: function loadChildren() {
-          return __webpack_require__.e(
+          return Promise.all(
           /*! import() | cursos-cursos-module */
-          "cursos-cursos-module").then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("cursos-cursos-module")]).then(__webpack_require__.bind(null,
           /*! ./cursos/cursos.module */
           "./src/app/cursos/cursos.module.ts")).then(function (m) {
             return m.CursosPageModule;
@@ -237,9 +257,9 @@
       }, {
         path: 'login',
         loadChildren: function loadChildren() {
-          return __webpack_require__.e(
+          return Promise.all(
           /*! import() | pages-login-login-module */
-          "pages-login-login-module").then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("pages-login-login-module")]).then(__webpack_require__.bind(null,
           /*! ./pages/login/login.module */
           "./src/app/pages/login/login.module.ts")).then(function (m) {
             return m.LoginPageModule;
@@ -248,12 +268,34 @@
       }, {
         path: 'signup',
         loadChildren: function loadChildren() {
-          return __webpack_require__.e(
+          return Promise.all(
           /*! import() | pages-signup-signup-module */
-          "pages-signup-signup-module").then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("pages-signup-signup-module")]).then(__webpack_require__.bind(null,
           /*! ./pages/signup/signup.module */
           "./src/app/pages/signup/signup.module.ts")).then(function (m) {
             return m.SignupPageModule;
+          });
+        }
+      }, {
+        path: 'contacto',
+        loadChildren: function loadChildren() {
+          return __webpack_require__.e(
+          /*! import() | contacto-contacto-module */
+          "contacto-contacto-module").then(__webpack_require__.bind(null,
+          /*! ./contacto/contacto.module */
+          "./src/app/contacto/contacto.module.ts")).then(function (m) {
+            return m.ContactoPageModule;
+          });
+        }
+      }, {
+        path: 'detalle-curso',
+        loadChildren: function loadChildren() {
+          return Promise.all(
+          /*! import() | detalle-curso-detalle-curso-module */
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("detalle-curso-detalle-curso-module")]).then(__webpack_require__.bind(null,
+          /*! ./detalle-curso/detalle-curso.module */
+          "./src/app/detalle-curso/detalle-curso.module.ts")).then(function (m) {
+            return m.DetalleCursoPageModule;
           });
         }
       }];
@@ -325,9 +367,9 @@
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @ionic/angular */
-      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
       /* harmony import */
 
 
@@ -340,14 +382,60 @@
       var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @ionic-native/status-bar/ngx */
       "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 
       var AppComponent = /*#__PURE__*/function () {
-        function AppComponent(platform, splashScreen, statusBar) {
+        function AppComponent(alertController, router, platform, splashScreen, statusBar, menu) {
           _classCallCheck(this, AppComponent);
 
+          this.alertController = alertController;
+          this.router = router;
           this.platform = platform;
           this.splashScreen = splashScreen;
           this.statusBar = statusBar;
+          this.menu = menu;
+          this.listMenu = [{
+            item: "Curso Aprobados",
+            disable: true
+          }, {
+            item: "Descargar Diplomas",
+            disable: true
+          }, {
+            item: "Sugerencias y Reclamos",
+            disable: true
+          }, {
+            item: "Contáctanos",
+            disable: false
+          }, {
+            item: "Perfil",
+            disable: true
+          }];
+          this.listTabs = [{
+            item: "Home",
+            disable: false,
+            tab: "home",
+            icon: "home"
+          }, {
+            item: "Mis Cursos",
+            disable: true,
+            tab: "cursos",
+            icon: "school"
+          }, {
+            item: "Notificaciones",
+            disable: true,
+            tab: "notificaciones",
+            icon: "notifications"
+          }, {
+            item: "Encuestas",
+            disable: true,
+            tab: "encuestas",
+            icon: "bar-chart"
+          }];
           this.initializeApp();
         }
 
@@ -356,9 +444,77 @@
           value: function initializeApp() {
             var _this = this;
 
+            this.estadoUser = false;
             this.platform.ready().then(function () {
               _this.statusBar.styleDefault();
             });
+          }
+        }, {
+          key: "verificar",
+          value: function verificar(index) {
+            if (this.listMenu[index].disable) this.alertLogin();
+
+            if (index == 3) {
+              this.router.navigate(["educ/contacto/"]);
+            }
+          }
+        }, {
+          key: "alertLogin",
+          value: function alertLogin() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var _this2 = this;
+
+              var alert;
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return this.alertController.create({
+                        header: 'Para continuar regístrese o inicie sesión',
+                        message: '¿Desea registrarse o iniciar sesión?',
+                        backdropDismiss: false,
+                        buttons: [{
+                          text: 'NO',
+                          handler: function handler() {
+                            _this2.router.navigate(["/educ/home/"]);
+                          }
+                        }, {
+                          text: 'SI',
+                          handler: function handler() {
+                            _this2.router.navigate(["/login"]);
+                          }
+                        }]
+                      });
+
+                    case 2:
+                      alert = _context.sent;
+                      _context.next = 5;
+                      return alert.present();
+
+                    case 5:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+          }
+        }, {
+          key: "salir",
+          value: function salir() {
+            this.router.navigate(["/login"]);
+            this.estadoUser = false;
+            this.id_User = null;
+            this.menu.close();
+
+            for (var i = 0; i < this.listMenu.length; i++) {
+              i == 3 ? this.listMenu[i].disable = false : this.listMenu[i].disable = true;
+            }
+
+            for (var _i = 0; _i < this.listTabs.length; _i++) {
+              _i == 0 ? this.listTabs[_i].disable = false : this.listTabs[_i].disable = true;
+            }
           }
         }]);
 
@@ -367,11 +523,17 @@
 
       AppComponent.ctorParameters = function () {
         return [{
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"]
         }, {
           type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"]
         }, {
           type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"]
         }];
       };
 
@@ -383,7 +545,7 @@
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
         /*! ./app.component.scss */
         "./src/app/app.component.scss"))["default"]]
-      })], AppComponent);
+      }), Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()], AppComponent);
       /***/
     },
 
@@ -490,6 +652,12 @@
       var _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @ionic-native/facebook/ngx */
       "./node_modules/@ionic-native/facebook/__ivy_ngcc__/ngx/index.js");
+      /* harmony import */
+
+
+      var _tabs_tabs_page__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      /*! ./tabs/tabs.page */
+      "./src/app/tabs/tabs.page.ts");
 
       var AppModule = function AppModule() {
         _classCallCheck(this, AppModule);
@@ -499,12 +667,166 @@
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_10__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_12__["firebaseConfig"]), _angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__["AngularFireAuthModule"]],
-        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_11__["GooglePlus"], _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_13__["Facebook"], {
+        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_11__["GooglePlus"], _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_13__["Facebook"], _tabs_tabs_page__WEBPACK_IMPORTED_MODULE_14__["TabsPage"], {
           provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
           useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
         }],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
       })], AppModule);
+      /***/
+    },
+
+    /***/
+    "./src/app/tabs/tabs.page.scss":
+    /*!*************************************!*\
+      !*** ./src/app/tabs/tabs.page.scss ***!
+      \*************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function srcAppTabsTabsPageScss(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "ion-tab-bar {\n  --background: var(--ion-tab-bar-background, var(--ion-background-color, #ECECEC));\n  --border: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlGQUFBO0VBQ0EsY0FBQTtBQUNKIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10YWItYmFyIHtcbiAgICAtLWJhY2tncm91bmQ6IHZhcigtLWlvbi10YWItYmFyLWJhY2tncm91bmQsIHZhcigtLWlvbi1iYWNrZ3JvdW5kLWNvbG9yLCAjRUNFQ0VDKSk7XG4gICAgLS1ib3JkZXI6IG5vbmU7XG59Il19 */";
+      /***/
+    },
+
+    /***/
+    "./src/app/tabs/tabs.page.ts":
+    /*!***********************************!*\
+      !*** ./src/app/tabs/tabs.page.ts ***!
+      \***********************************/
+
+    /*! exports provided: TabsPage */
+
+    /***/
+    function srcAppTabsTabsPageTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "TabsPage", function () {
+        return TabsPage;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+      /* harmony import */
+
+
+      var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../app.component */
+      "./src/app/app.component.ts");
+
+      var TabsPage = /*#__PURE__*/function () {
+        function TabsPage(alertController, router, App) {
+          _classCallCheck(this, TabsPage);
+
+          this.alertController = alertController;
+          this.router = router;
+          this.App = App;
+          this.listTabs = this.App.listTabs;
+        }
+
+        _createClass(TabsPage, [{
+          key: "verificar",
+          value: function verificar(index) {
+            if (this.listTabs[index].disable) this.alertLogin();
+          }
+        }, {
+          key: "alertLogin",
+          value: function alertLogin() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var _this3 = this;
+
+              var alert;
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return this.alertController.create({
+                        header: 'Para continuar regístrese o inicie sesión',
+                        message: '¿Desea registrarse o iniciar sesión?',
+                        backdropDismiss: false,
+                        buttons: [{
+                          text: 'NO',
+                          handler: function handler() {
+                            _this3.router.navigate(["/educ/home/"]);
+                          }
+                        }, {
+                          text: 'SI',
+                          handler: function handler() {
+                            _this3.router.navigate(["/login"]);
+                          }
+                        }]
+                      });
+
+                    case 2:
+                      alert = _context2.sent;
+                      _context2.next = 5;
+                      return alert.present();
+
+                    case 5:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2, this);
+            }));
+          }
+        }]);
+
+        return TabsPage;
+      }();
+
+      TabsPage.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        }, {
+          type: _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]
+        }];
+      };
+
+      TabsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-tabs',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! raw-loader!./tabs.page.html */
+        "./node_modules/raw-loader/dist/cjs.js!./src/app/tabs/tabs.page.html"))["default"],
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! ./tabs.page.scss */
+        "./src/app/tabs/tabs.page.scss"))["default"]]
+      })], TabsPage);
       /***/
     },
 
@@ -621,7 +943,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       module.exports = __webpack_require__(
-      /*! C:\Users\david\Downloads\app_eduacion_continua-main\src\main.ts */
+      /*! C:\Users\david\Desktop\app_eduacion_continua-main\src\main.ts */
       "./src/main.ts");
       /***/
     }
