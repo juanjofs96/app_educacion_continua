@@ -20302,7 +20302,11 @@
     /***/
     function _(module, exports, __webpack_require__) {
       __webpack_require__(
+<<<<<<< HEAD
       /*! C:\Users\david\Desktop\app_eduacion_continua-main\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\es5-polyfills.js */
+=======
+      /*! C:\Users\Kleberth\Desktop\App Software\app_eduacion_continua\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\es5-polyfills.js */
+>>>>>>> e8cf59b916c0ab5e35202fa36dd07789421dc008
       "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js");
 
       __webpack_require__(
@@ -20310,6 +20314,7 @@
       "./node_modules/zone.js/dist/zone-legacy.js");
 
       __webpack_require__(
+<<<<<<< HEAD
       /*! C:\Users\david\Desktop\app_eduacion_continua-main\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\jit-polyfills.js */
       "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js");
 
@@ -20319,6 +20324,17 @@
 
       module.exports = __webpack_require__(
       /*! C:\Users\david\Desktop\app_eduacion_continua-main\src\polyfills.ts */
+=======
+      /*! C:\Users\Kleberth\Desktop\App Software\app_eduacion_continua\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\jit-polyfills.js */
+      "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js");
+
+      __webpack_require__(
+      /*! C:\Users\Kleberth\Desktop\App Software\app_eduacion_continua\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\es5-jit-polyfills.js */
+      "./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-jit-polyfills.js");
+
+      module.exports = __webpack_require__(
+      /*! C:\Users\Kleberth\Desktop\App Software\app_eduacion_continua\src\polyfills.ts */
+>>>>>>> e8cf59b916c0ab5e35202fa36dd07789421dc008
       "./src/polyfills.ts");
       /***/
     }
