@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar class=\"toolhead\">\n    <ion-buttons slot=\"start\">\n        <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Mis Cursos</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar class=\"toolhead\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Mis Cursos</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-item *ngFor=\"let list of listCursos\" [routerLink]=\"['/educ/cursos',list.id_curso]\">\r\n      <ion-avatar slot=\"start\">\r\n        <ion-img [src]=\"list.imagen\"></ion-img>\r\n      </ion-avatar>\r\n      <ion-label>\r\n        <h3>{{list.titulo}}</h3>\r\n        <p>{{list.fecha}}</p>\r\n        <ion-text color=\"{{list.color}}\">\r\n          <p>{{list.estado}}</p>\r\n        </ion-text>\r\n\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n</ion-content>");
 
 /***/ }),
 
@@ -117,14 +117,68 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CursosPage", function() { return CursosPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+
+
+
+
 
 
 let CursosPage = class CursosPage {
-    constructor() { }
-    ngOnInit() {
+    constructor(App, alertController, router) {
+        this.App = App;
+        this.alertController = alertController;
+        this.router = router;
+        this.listCursos = [];
+    }
+    ionViewDidEnter() {
+        this.listCursos = [];
+        this.find = false;
+        if (this.App.id_User != null) {
+            this.getCursos();
+        }
+    }
+    getCursos() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var self = this;
+            yield jquery__WEBPACK_IMPORTED_MODULE_2__["getJSON"]("https://prueba-63695.firebaseio.com/cursos.json", function (data_cursos) {
+                jquery__WEBPACK_IMPORTED_MODULE_2__["getJSON"]("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
+                    for (let i = 0; i < data_users.length; i++) {
+                        for (let j = 0; j < data_cursos.length; j++) {
+                            if (data_users[i].id_user == data_cursos[j].id_user && data_users[i].id_user == self.App.id_User) {
+                                self.listCursos.push(data_cursos[j]);
+                                self.find = true;
+                            }
+                        }
+                    }
+                    if (!self.find) {
+                        self.alertCurso();
+                    }
+                });
+            });
+        });
+    }
+    alertCurso() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Mensaje',
+                subHeader: 'Sin cursos registrados',
+                message: 'Usted no pertenece a ningún curso',
+                buttons: ['OK']
+            });
+            yield alert.present();
+        });
     }
 };
-CursosPage.ctorParameters = () => [];
+CursosPage.ctorParameters = () => [
+    { type: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
+];
 CursosPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-cursos',

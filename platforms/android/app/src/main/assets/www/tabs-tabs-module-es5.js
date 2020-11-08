@@ -3,26 +3,6 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["tabs-tabs-module"], {
     /***/
-    "./node_modules/raw-loader/dist/cjs.js!./src/app/tabs/tabs.page.html":
-    /*!***************************************************************************!*\
-      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/tabs/tabs.page.html ***!
-      \***************************************************************************/
-
-    /*! exports provided: default */
-
-    /***/
-    function node_modulesRawLoaderDistCjsJsSrcAppTabsTabsPageHtml(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony default export */
-
-
-      __webpack_exports__["default"] = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button tab=\"home\">\n      <ion-icon name=\"home\"></ion-icon>\n      <ion-label>Home</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"cursos\">\n      <ion-icon name=\"school\"></ion-icon>\n      <ion-label>Mis Cursos</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"notificaciones\">\n      <ion-icon name=\"notifications\"></ion-icon>\n      <ion-label>Notificaciones</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"encuestas\">\n      <ion-icon name=\"bar-chart\"></ion-icon>\n      <ion-label>Encuestas</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
-      /***/
-    },
-
-    /***/
     "./src/app/tabs/tabs-routing.module.ts":
     /*!*********************************************!*\
       !*** ./src/app/tabs/tabs-routing.module.ts ***!
@@ -82,15 +62,29 @@
           }
         }, {
           path: 'cursos',
-          loadChildren: function loadChildren() {
-            return __webpack_require__.e(
-            /*! import() | cursos-cursos-module */
-            "cursos-cursos-module").then(__webpack_require__.bind(null,
-            /*! ../cursos/cursos.module */
-            "./src/app/cursos/cursos.module.ts")).then(function (m) {
-              return m.CursosPageModule;
-            });
-          }
+          children: [{
+            path: "",
+            loadChildren: function loadChildren() {
+              return Promise.all(
+              /*! import() | cursos-cursos-module */
+              [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("cursos-cursos-module")]).then(__webpack_require__.bind(null,
+              /*! ../cursos/cursos.module */
+              "./src/app/cursos/cursos.module.ts")).then(function (m) {
+                return m.CursosPageModule;
+              });
+            }
+          }, {
+            path: ':id_curso',
+            loadChildren: function loadChildren() {
+              return Promise.all(
+              /*! import() | detalle-curso-detalle-curso-module */
+              [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("detalle-curso-detalle-curso-module")]).then(__webpack_require__.bind(null,
+              /*! ../detalle-curso/detalle-curso.module */
+              "./src/app/detalle-curso/detalle-curso.module.ts")).then(function (m) {
+                return m.DetalleCursoPageModule;
+              });
+            }
+          }]
         }, {
           path: 'notificaciones',
           loadChildren: function loadChildren() {
@@ -111,6 +105,17 @@
             /*! ../encuestas/encuestas.module */
             "./src/app/encuestas/encuestas.module.ts")).then(function (m) {
               return m.EncuestasPageModule;
+            });
+          }
+        }, {
+          path: 'contacto',
+          loadChildren: function loadChildren() {
+            return __webpack_require__.e(
+            /*! import() | contacto-contacto-module */
+            "contacto-contacto-module").then(__webpack_require__.bind(null,
+            /*! ../contacto/contacto.module */
+            "./src/app/contacto/contacto.module.ts")).then(function (m) {
+              return m.ContactoPageModule;
             });
           }
         }, {
@@ -205,78 +210,6 @@
         imports: [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["IonicModule"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"], _tabs_routing_module__WEBPACK_IMPORTED_MODULE_5__["TabsPageRoutingModule"]],
         declarations: [_tabs_page__WEBPACK_IMPORTED_MODULE_6__["TabsPage"]]
       })], TabsPageModule);
-      /***/
-    },
-
-    /***/
-    "./src/app/tabs/tabs.page.scss":
-    /*!*************************************!*\
-      !*** ./src/app/tabs/tabs.page.scss ***!
-      \*************************************/
-
-    /*! exports provided: default */
-
-    /***/
-    function srcAppTabsTabsPageScss(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony default export */
-
-
-      __webpack_exports__["default"] = "ion-tab-bar {\n  --background: var(--ion-tab-bar-background, var(--ion-background-color, #ECECEC));\n  --border: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlGQUFBO0VBQ0EsY0FBQTtBQUNKIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10YWItYmFyIHtcbiAgICAtLWJhY2tncm91bmQ6IHZhcigtLWlvbi10YWItYmFyLWJhY2tncm91bmQsIHZhcigtLWlvbi1iYWNrZ3JvdW5kLWNvbG9yLCAjRUNFQ0VDKSk7XG4gICAgLS1ib3JkZXI6IG5vbmU7XG59Il19 */";
-      /***/
-    },
-
-    /***/
-    "./src/app/tabs/tabs.page.ts":
-    /*!***********************************!*\
-      !*** ./src/app/tabs/tabs.page.ts ***!
-      \***********************************/
-
-    /*! exports provided: TabsPage */
-
-    /***/
-    function srcAppTabsTabsPageTs(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "TabsPage", function () {
-        return TabsPage;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "./node_modules/tslib/tslib.es6.js");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-
-      var TabsPage = function TabsPage() {
-        _classCallCheck(this, TabsPage);
-      };
-
-      TabsPage.ctorParameters = function () {
-        return [];
-      };
-
-      TabsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-tabs',
-        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
-        /*! raw-loader!./tabs.page.html */
-        "./node_modules/raw-loader/dist/cjs.js!./src/app/tabs/tabs.page.html"))["default"],
-        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
-        /*! ./tabs.page.scss */
-        "./src/app/tabs/tabs.page.scss"))["default"]]
-      })], TabsPage);
       /***/
     }
   }]);
