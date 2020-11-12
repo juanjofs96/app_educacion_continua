@@ -1,4 +1,4 @@
-# app_educacion_continua
+# App Educación Continua
 
 git commit dummy
 App móvil para Educación Continua
