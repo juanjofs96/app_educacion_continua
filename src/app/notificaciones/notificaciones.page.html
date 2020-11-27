@@ -8,5 +8,16 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list lines="full" >
+    <ion-item *ngFor="let list of listNotificaciones">
+      <ion-avatar slot="start">
+        <ion-img [src]="list.imagen"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{list.titulo}}</h3>
+        <p>{{list.estado}}</p>
+          <p>{{list.fecha}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
