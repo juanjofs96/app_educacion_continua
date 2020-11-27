@@ -36,6 +36,10 @@ const routes: Routes = [
         loadChildren: () => import('../contacto/contacto.module').then(m => m.ContactoPageModule)
       },
       {
+        path: 'sugerencias',
+        loadChildren: () => import('../sugerencias/sugerencias.module').then(m => m.SugerenciasPageModule)
+      },
+      {
         path: '',
         redirectTo: '/educ/home',
         pathMatch: 'full'

@@ -47,7 +47,7 @@ export class AppComponent {
       this.menu.close();
 
     }
-    if (index == 4) {
+    if (index == 2) {
       this.router.navigate(["educ/sugerencias/"]);
       this.menu.close();
     }
