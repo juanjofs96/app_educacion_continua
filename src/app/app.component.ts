@@ -44,6 +44,12 @@ export class AppComponent {
     if (this.listMenu[index].disable) this.alertLogin();
     if (index == 3) {
       this.router.navigate(["educ/contacto/"]);
+      this.menu.close();
+
+    }
+    if (index == 4) {
+      this.router.navigate(["educ/sugerencias/"]);
+      this.menu.close();
     }
   }
 

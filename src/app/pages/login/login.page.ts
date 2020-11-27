@@ -47,34 +47,34 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
+    var data={
+      "correo":this.email,
+      "clave":this.pass
+    }
     var self = this;
-    await $.getJSON("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
-      for (let i = 0; i < data_users.length; i++) {
-        if (data_users[i].email == self.email && data_users[i].pass == self.pass) {
-          self.noExiste = false;
-          self.App.id_User = data_users[i].id_user;
-          self.habilitarOpciones();
-          break;
-        }
-      }
-      if (self.noExiste) self.alertError("Su correo o contraseña son incorrectos");
+    await $.post("http://localhost:8000/api/login_participante/",data).done(function (user) {
+          if(!user.error){
+            self.App.id_User = user.id;
+            self.habilitarOpciones();
+          }          
+         else{
+          self.alertError(user.mensaje);
+         }
     });
   }
 
   async verificarCuenta(user:any) {
     var self = this;
-    await $.getJSON("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
-      for (let i = 0; i < data_users.length; i++) {
-        if (data_users[i].email == user) {
-          self.noExiste = false;
-          self.App.id_User = data_users[i].id_user;
-          self.habilitarOpciones();
-          break;
-        }
-      }
-      if (self.noExiste) self.alertError("No se encuentra registrado");
-    });
-  }
+    await $.post("http://localhost:8000/api/existe_participante/",user).done( function (user) {
+          if(!user.error){
+            self.App.id_User = user.id;
+            self.habilitarOpciones();
+          }
+          else{
+            self.alertError("No se encuentra registrado");
+          }
+  })
+}
 
   async loginGoogle() {
     let params;
