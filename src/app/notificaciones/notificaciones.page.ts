@@ -25,34 +25,32 @@ export class NotificacionesPage implements OnInit {
     this.listNotificaciones = []
     this.find=false;
     if(this.App.id_User!=null) {
-      this.getCursos();
+      this.getNotificaciones();
     }
   }
-  async getCursos() {
+  async getNotificaciones() {
     var self = this;
-    await $.getJSON("https://prueba-63695.firebaseio.com/cursos.json", function (data_cursos) {
-      $.getJSON("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
-        for (let i = 0; i < data_users.length; i++) {
-            for (let j = 0; j < data_cursos.length; j++) {
-              if (data_users[i].id_user == data_cursos[j].id_user && data_users[i].id_user == self.App.id_User) {
-                self.listNotificaciones.push(data_cursos[j]);
-                self.find=true;
-              }
-            }
-        }
-        if(!self.find){
-          self.alertCurso();
-        }
-      })
+    var data={
+      "id":this.App.id_User
+    }
+    await $.post("http://localhost:8000/api/notificaciones_participante/",data).done(function (notificacion) {
+    console.log(notificacion)  
+    if(!notificacion.error){
+          self.listNotificaciones=notificacion.notificaciones
+      }
+      else{
+        self.alertNotificacion(notificacion.mensaje)
+      }
+
     })
     
   }
 
-  async alertCurso() {
+  async alertNotificacion(mensaje:string) {
       const alert = await this.alertController.create({
         header: 'Mensaje',
-        subHeader: 'Sin cursos registrados',
-        message: 'Usted no pertenece a ningún curso',
+        subHeader: 'Sin Notificaciones',
+        message: mensaje,
         buttons: ['OK']
       });
   
