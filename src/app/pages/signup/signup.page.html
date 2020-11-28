@@ -9,15 +9,15 @@
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Nombres</ion-label>
-        <ion-input [(ngModel)]="name" name="nombre" autocomplete="on" type="email"><ion-icon name="accessibility-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="name" name="nombre" autocomplete="on" type="text"><ion-icon name="person-outline"></ion-icon></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Apellidos</ion-label>
-        <ion-input [(ngModel)]="apellidos" autocomplete="off" name="apellidos" type="text"><ion-icon name="person-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="apellidos" autocomplete="off" name="apellidos" type="text"><ion-icon name="people-outline"></ion-icon></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Identificación</ion-label>
-        <ion-input [(ngModel)]="id" name="id" autocomplete="on" type="text"><ion-icon name="accessibility-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="id" name="id" autocomplete="on" type="text"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Correo electrónico</ion-label>
@@ -30,13 +30,13 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Direccion</ion-label>
-        <ion-input [(ngModel)]="direccion" autocomplete="off" name="direccion" type="text"><ion-icon name="person-outline"></ion-icon></ion-input>
+        <ion-label position="stacked">Dirección</ion-label>
+        <ion-input [(ngModel)]="direccion" autocomplete="off" name="direccion" type="text"><ion-icon name="globe-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input [(ngModel)]="pass" autocomplete="off" name="pass" type="password"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="pass" autocomplete="off" name="pass" type="password"><ion-icon name="keypad-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item>
@@ -44,7 +44,7 @@
         <ion-input [(ngModel)]="celular" autocomplete="off" name="celular" type="text"><ion-icon name="call-outline"></ion-icon></ion-input>
       </ion-item>
       <ion-item>
-      <ion-label>Genero</ion-label>
+      <ion-label position="stacked">Género</ion-label>
       <ion-select [(ngModel)]="genero" placeholder="Seleccione su género" interface="popover" name="genero">
         <ion-select-option value="M">Masculino</ion-select-option>
         <ion-select-option value="F">Femenino</ion-select-option>
@@ -52,7 +52,7 @@
     </ion-item>
 
       <ion-item lines='none'>
-        ¿Ya tienes una cuenta? <a routerLink='/login'> Inicia Sesión</a>
+        ¿Ya tienes una cuenta?<a routerLink='/login' slot="end">Inicia Sesión</a>
       </ion-item>
     </ion-list>
     <ion-button expand="block" share="round" color="primary" class="ion-padding-horizontal" (click)="registrar()">Registrar</ion-button>

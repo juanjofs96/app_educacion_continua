@@ -13,11 +13,11 @@
 
       <ion-item>
         <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input [(ngModel)]="pass" autocomplete="off" name="clave" type="password"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="pass" autocomplete="off" name="clave" type="password"><ion-icon name="keypad-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <a routerLink="/educ/home/">No iniciar sesión</a>
+        <a routerLink="/educ/home/" slot="end">No iniciar sesión</a>
       </ion-item>
     </ion-list>
     <ion-button expand="block" color="primary" class="ion-padding-horizontal" (click)="login()">Iniciar Sesión</ion-button>
