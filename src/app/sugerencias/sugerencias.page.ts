@@ -78,6 +78,5 @@ export class SugerenciasPage implements OnInit {
 
     await alert.present();
   }
-
 }
 
