@@ -16,9 +16,9 @@ export class SugerenciasPage implements OnInit {
   private file: any;
 
   constructor(private App: AppComponent, private alertController: AlertController) {
-    this.mensaje="";
-    this.asunto="";
-   }
+    this.mensaje = "";
+    this.asunto = "";
+  }
 
   ngOnInit() {
 
@@ -26,8 +26,8 @@ export class SugerenciasPage implements OnInit {
 
   enviarSugerencia() {
     this.data = new FormData;
-    this.mensaje=="undefined" ? this.mensaje=null : null;
-    this.file==null ? null : this.data.append("imagen", this.file);
+    this.mensaje == "undefined" ? this.mensaje = null : null;
+    this.file == null ? null : this.data.append("imagen", this.file);
     this.data.append("asunto", this.asunto);
     this.data.append("id_participante", this.App.id_User);
     this.data.append("mensaje", this.mensaje);
@@ -41,8 +41,8 @@ export class SugerenciasPage implements OnInit {
       enctype: 'multipart/form-data',
       success: function (res) {
         self.alertError("Sugerencia enviada", "Gracias, su sugerencia fue recibida");
-        self.mensaje="";
-        self.asunto="";
+        self.mensaje = "";
+        self.asunto = "";
       },
       error: function (error) {
         console.log(error)
@@ -59,7 +59,6 @@ export class SugerenciasPage implements OnInit {
       }
     });
   }
-
 
   uploadImage(input) {
     if (input.target.files && input.target.files[0]) {
