@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery";
 import { AlertController } from '@ionic/angular';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -19,21 +19,20 @@ export class SignupPage implements OnInit {
   private id: string = "";
   private genero: string = "";
   private data: any;
-  private data_aux:any;
-  private verificado:boolean;
-  constructor(private alertController: AlertController, private router: ActivatedRoute,private route: Router) {
+  private data_aux: any;
+  private verificado: boolean;
+  constructor(private alertController: AlertController, private router: ActivatedRoute, private route: Router) {
     this.router.queryParams.subscribe(params => {
       this.data_aux = JSON.parse(params.user);
-      this.name= this.data_aux.nombres;
-      this.email=this.data_aux.correo;
-      this.apellidos=this.data_aux.apellidos;
+      this.name = this.data_aux.nombres;
+      this.email = this.data_aux.correo;
+      this.apellidos = this.data_aux.apellidos;
     })
   }
 
   ngOnInit() {
 
   }
-
 
   registrar() {
     this.data = {
@@ -48,8 +47,8 @@ export class SignupPage implements OnInit {
       genero: this.genero
     }
     var self = this;
-    var validado=this.validarCampos();
-    if ( validado && this.verificado) {
+    var validado = this.validarCampos();
+    if (validado && this.verificado) {
       $.post("http://127.0.0.1:8000/api/participante/", this.data)
         .done(function (data) {
           self.alertError("Registro exitoso", "Su cuenta se ha creado exitosamente");
@@ -63,17 +62,16 @@ export class SignupPage implements OnInit {
             x["identificacion"][0] != null ? self.alertError("Error al registrarse", x["identificacion"][0]) : isError = true;
             !isError ? self.alertError("Error al registrarse", "El registro no fue exitoso") : null;
           } catch (ex) {
-            if(isError){
-            self.alertError("Error al registrarse", "El registro no fue exitoso");
+            if (isError) {
+              self.alertError("Error al registrarse", "El registro no fue exitoso");
             }
           }
         });
     }
-   if(!validado)
+    if (!validado)
       self.alertError("Campos vacíos", "Debe llenar todos los campos para poder registrarse")
-    
-  }
 
+  }
 
   validarCampos() {
     if (this.name != "" && this.apellidos != "" && this.id != ""
@@ -81,12 +79,12 @@ export class SignupPage implements OnInit {
       && this.celular != "" && this.direccion != "") {
       if (this.pass != this.pass2) {
         this.alertError("Verifique su clave", "Las contraseñas no coinciden");
-        this.verificado=false;
+        this.verificado = false;
       }
-      else{
-        this.verificado=true;
+      else {
+        this.verificado = true;
       }
-    return true;
+      return true;
     }
     return false;
   }
