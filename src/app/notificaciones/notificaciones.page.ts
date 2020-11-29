@@ -33,10 +33,10 @@ export class NotificacionesPage implements OnInit {
     var data={
       "id":this.App.id_User
     }
-    await $.post("http://localhost:8000/api/notificaciones_participante/",data).done(function (notificacion) {
-    console.log(notificacion)  
+    await $.post("http://127.0.0.1:8000/api/notificaciones_participante/",data).done(function (notificacion) {
     if(!notificacion.error){
           self.listNotificaciones=notificacion.notificaciones
+
       }
       else{
         self.alertNotificacion(notificacion.mensaje)

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n  <div class=\"vertical-center\">\n    <img src=\"assets/images/LogoCEC.png\" class=\"smallLogo\" />\n  </div>\n  <ion-text color=\"primary\" class=\"color-h3\">\n    <h3>Iniciar Sesión</h3>\n  </ion-text>\n  <form>\n    <ion-list>\n      <ion-item>\n        <ion-label position=\"stacked\">Correo electrónico</ion-label>\n        <ion-input autocomplete=\"on\" type=\"email\"><ion-icon name=\"mail-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Contraseña</ion-label>\n        <ion-input autocomplete=\"off\" type=\"password\"><ion-icon name=\"finger-print-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item lines=\"none\">\n        <a routerLink=\"/signup\">Recuperar contraseña</a>\n      </ion-item>\n    </ion-list>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" routerLink=\"/educ/home\">Iniciar Sesión</ion-button>\n  </form>\n\n  <!--header class=\"ion-padding-start ion-padding-top\"></!--header-->\n  <ion-button expand=\"block\" color=\"tertiary\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-facebook\"></ion-icon>\n    Iniciar Sesión con Facebook\n  </ion-button>\n\n  <ion-button expand=\"block\" color=\"danger\" (click)=\"login()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-google\"></ion-icon>\n    Iniciar Sesión con Google\n  </ion-button>\n\n  <section>\n    <header class=\"ion-padding-start ion-padding-top\">¿Eres nuevo?</header>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" routerLink=\"/signup\">\n      Crear nueva cuenta</ion-button>\n  </section>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n  <div class=\"vertical-center\">\n    <img src=\"assets/images/LogoCEC.png\" class=\"smallLogo\" />\n  </div>\n  <ion-text color=\"primary\" class=\"color-h3\">\n    <h3>Iniciar Sesión</h3>\n  </ion-text>\n  <form>\n    <ion-list>\n      <ion-item>\n        <ion-label position=\"stacked\">Correo electrónico</ion-label>\n        <ion-input [(ngModel)]=\"email\" name=\"correo\" autocomplete=\"on\" type=\"email\"><ion-icon name=\"mail-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Contraseña</ion-label>\n        <ion-input [(ngModel)]=\"pass\" autocomplete=\"off\" name=\"clave\" type=\"password\"><ion-icon name=\"finger-print-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item lines=\"none\">\n        <a routerLink=\"/educ/home/\">No iniciar sesión</a>\n      </ion-item>\n    </ion-list>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" (click)=\"login()\">Iniciar Sesión</ion-button>\n  </form>\n\n  <!--header class=\"ion-padding-start ion-padding-top\"></!--header-->\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"loginFacebook()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-facebook\"></ion-icon>\n    Iniciar Sesión con Facebook\n  </ion-button>\n\n  <ion-button expand=\"block\" color=\"danger\" (click)=\"loginGoogle()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-google\"></ion-icon>\n    Iniciar Sesión con Google\n  </ion-button>\n\n  <section>\n    <header class=\"ion-padding-start ion-padding-top\">¿Eres nuevo?</header>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" routerLink=\"/signup\">\n      Crear nueva cuenta</ion-button>\n  </section>\n</ion-content>");
 
 /***/ }),
 
@@ -123,6 +123,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
 /* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/facebook/ngx */ "./node_modules/@ionic-native/facebook/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app.component */ "./src/app/app.component.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_9__);
+
+
+
+
 
 
 
@@ -132,12 +140,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LoginPage = class LoginPage {
-    constructor(router, platform, google, loadingController, fireAuth) {
+    constructor(router, platform, google, loadingController, fireAuth, fb, App, alertController) {
         this.router = router;
         this.platform = platform;
         this.google = google;
         this.loadingController = loadingController;
         this.fireAuth = fireAuth;
+        this.fb = fb;
+        this.App = App;
+        this.alertController = alertController;
+        this.email = "";
+        this.pass = "";
+        this.noExiste = true;
     }
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -153,32 +167,89 @@ let LoginPage = class LoginPage {
     }
     login() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var self = this;
+            yield jquery__WEBPACK_IMPORTED_MODULE_9__["getJSON"]("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
+                for (let i = 0; i < data_users.length; i++) {
+                    if (data_users[i].email == self.email && data_users[i].pass == self.pass) {
+                        self.noExiste = false;
+                        self.App.id_User = data_users[i].id_user;
+                        self.habilitarOpciones();
+                        break;
+                    }
+                }
+                if (self.noExiste)
+                    self.alertError("Su correo o contraseña son incorrectos");
+            });
+        });
+    }
+    verificarCuenta(user) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var self = this;
+            yield jquery__WEBPACK_IMPORTED_MODULE_9__["getJSON"]("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
+                for (let i = 0; i < data_users.length; i++) {
+                    if (data_users[i].email == user) {
+                        self.noExiste = false;
+                        self.App.id_User = data_users[i].id_user;
+                        self.habilitarOpciones();
+                        break;
+                    }
+                }
+                if (self.noExiste)
+                    self.alertError("No se encuentra registrado");
+            });
+        });
+    }
+    loginGoogle() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             let params;
             if (this.platform.is('android')) {
                 params = {
                     'webClientId': '44397923925-udqfaidjvqhp8p7ule0oihpn4i3co6je.apps.googleusercontent.com',
                     'offline': true
                 };
+                this.google.login(params)
+                    .then((response) => {
+                    const { idToken, accessToken } = response;
+                    this.onLoginSuccess(idToken, accessToken);
+                }).catch((error) => {
+                    console.log(error);
+                    alert('error:' + JSON.stringify(error));
+                });
             }
             else {
-                params = {};
                 this.loginGoogleWeb();
             }
-            this.google.login(params)
-                .then((response) => {
-                const { idToken, accessToken } = response;
-                this.onLoginSuccess(idToken, accessToken);
-            }).catch((error) => {
-                console.log(error);
-                alert('error:' + JSON.stringify(error));
-            });
         });
+    }
+    loginFacebook() {
+        if (this.platform.is('android')) {
+            this.loginFacebookAndroid();
+        }
+        else {
+            this.loginFacebookWeb();
+        }
     }
     loginGoogleWeb() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const res = yield this.fireAuth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].GoogleAuthProvider());
-            const user = res.user;
-            console.log(user);
+            const email = res.user.email;
+            this.verificarCuenta(email);
+        });
+    }
+    loginFacebookAndroid() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const res = yield this.fb.login(['public_profile', 'email']);
+            const facebookCredential = firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].FacebookAuthProvider.credential(res.authResponse.accessToken);
+            const resConfirmed = yield this.fireAuth.auth.signInWithCredential(facebookCredential);
+            const email = resConfirmed.user.email;
+            this.verificarCuenta(email);
+        });
+    }
+    loginFacebookWeb() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const res = yield this.fireAuth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].FacebookAuthProvider());
+            const email = res.user.email;
+            this.verificarCuenta(email);
         });
     }
     onLoginSuccess(accessToken, accessSecret) {
@@ -187,12 +258,34 @@ let LoginPage = class LoginPage {
             .credential(accessToken);
         this.fireAuth.auth.signInWithCredential(credential)
             .then((response) => {
-            this.router.navigate(["/profile"]);
+            const email = response.user.email;
+            this.verificarCuenta(email);
             this.loading.dismiss();
         });
     }
     onLoginError(err) {
         console.log(err);
+    }
+    habilitarOpciones() {
+        this.App.estadoUser = true;
+        for (let i = 0; i < this.App.listMenu.length; i++) {
+            this.App.listMenu[i].disable = false;
+        }
+        for (let i = 0; i < this.App.listTabs.length; i++) {
+            this.App.listTabs[i].disable = false;
+        }
+        this.router.navigate(["/educ/home/"]);
+    }
+    alertError(msg) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Mensaje',
+                subHeader: 'Credenciales incorrectas',
+                message: msg,
+                buttons: ['OK']
+            });
+            yield alert.present();
+        });
     }
 };
 LoginPage.ctorParameters = () => [
@@ -200,7 +293,10 @@ LoginPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"] },
     { type: _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_3__["GooglePlus"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"] },
-    { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"] }
+    { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"] },
+    { type: _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_7__["Facebook"] },
+    { type: _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"] }
 ];
 LoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

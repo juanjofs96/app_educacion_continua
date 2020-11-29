@@ -1,5 +1,5 @@
-import { Component, Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component,OnInit } from '@angular/core';
+import { NavigationExtras, Router} from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
@@ -21,7 +21,6 @@ export class LoginPage implements OnInit {
   public id_user: string;
   private email: string = "";
   private pass: string = "";
-  private noExiste: boolean;
   constructor(
     private router: Router,
     private platform: Platform,
@@ -32,7 +31,7 @@ export class LoginPage implements OnInit {
     private App: AppComponent,
     private alertController: AlertController
   ) {
-    this.noExiste = true;
+  
   }
 
   async ngOnInit() {
@@ -58,20 +57,32 @@ export class LoginPage implements OnInit {
             self.habilitarOpciones();
           }          
          else{
-          self.alertError(user.mensaje);
+          self.alertError(user.mensaje,"Credenciales incorrectas");
          }
     });
   }
 
-  async verificarCuenta(user:any) {
+  async verificarCuenta(res:any) {
     var self = this;
-    await $.post("http://localhost:8000/api/existe_participante/",user).done( function (user) {
+    
+    var data ={
+      "correo":res['email'],
+      "nombres":res['given_name'],
+      "apellidos":res['family_name']
+    }
+    await $.post("http://localhost:8000/api/existe_participante/",data).done( function (user) {
           if(!user.error){
             self.App.id_User = user.id;
             self.habilitarOpciones();
           }
           else{
-            self.alertError("No se encuentra registrado");
+            let navigationExtras: NavigationExtras = {
+              queryParams: {
+                user: JSON.stringify(data)
+              }
+            };
+            self.alertError("Complete los datos faltantes para completar su registro","Inicio exitoso");
+            self.router.navigate(["/signup/"],navigationExtras);
           }
   })
 }
@@ -108,22 +119,19 @@ export class LoginPage implements OnInit {
 
   async loginGoogleWeb() {
     const res = await this.fireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    const email = res.user.email;
-    this.verificarCuenta(email);
+    this.verificarCuenta(res.additionalUserInfo.profile);
   }
 
   async loginFacebookAndroid() {
     const res: FacebookLoginResponse = await this.fb.login(['public_profile', 'email']);
     const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
     const resConfirmed = await this.fireAuth.auth.signInWithCredential(facebookCredential);
-    const email = resConfirmed.user.email;
-    this.verificarCuenta(email);
+    this.verificarCuenta(resConfirmed.additionalUserInfo.profile);
   }
 
   async loginFacebookWeb() {
     const res = await this.fireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
-    const email = res.user.email;
-    this.verificarCuenta(email);
+    this.verificarCuenta(res.additionalUserInfo.profile);
   }
 
   onLoginSuccess(accessToken, accessSecret) {
@@ -132,8 +140,7 @@ export class LoginPage implements OnInit {
         .credential(accessToken);
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
-        const email = response.user.email;
-        this.verificarCuenta(email);
+        this.verificarCuenta(response.additionalUserInfo.profile);
         this.loading.dismiss();
       })
   }
@@ -154,10 +161,9 @@ export class LoginPage implements OnInit {
     this.router.navigate(["/educ/home/"]);
   }
 
-  async alertError(msg:string) {
+  async alertError(msg:string,msg2:string) {
     const alert = await this.alertController.create({
-      header: 'Mensaje',
-      subHeader: 'Credenciales incorrectas',
+      header: msg2,
       message: msg,
       buttons: ['OK']
     });

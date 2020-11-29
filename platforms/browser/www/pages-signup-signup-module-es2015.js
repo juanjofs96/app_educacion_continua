@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content padding='true'>\n  <div class=\"vertical-center\">\n    <img src=\"assets/images/LogoCEC.png\" class=\"smallLogo\" />\n  </div>\n  <ion-text color=\"primary\" class=\"color-h3\">\n    <h3>Crear Cuenta</h3>\n  </ion-text>\n  <form>\n    <ion-list>\n      <ion-item>\n        <ion-label position=\"stacked\">Nombres</ion-label>\n        <ion-input autocomplete=\"on\" type=\"email\"><ion-icon name=\"accessibility-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Correo electrónico</ion-label>\n        <ion-input autocomplete=\"on\" type=\"email\"><ion-icon name=\"mail-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Usuario</ion-label>\n        <ion-input autocomplete=\"off\" type=\"text\"><ion-icon name=\"person-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Contraseña</ion-label>\n        <ion-input autocomplete=\"off\" type=\"password\"><ion-icon name=\"finger-print-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">N° Celular</ion-label>\n        <ion-input autocomplete=\"off\" type=\"number\"><ion-icon name=\"call-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item lines='none'>\n        ¿Ya tienes una cuenta? <a routerLink='/login'> Inicia Sesión</a>\n      </ion-item>\n    </ion-list>\n    <ion-button expand=\"block\" share=\"round\" color=\"primary\" class=\"ion-padding-horizontal\">Registrar</ion-button>\n    <ion-button expand=\"block\" share=\"round\" color=\"medium\" class=\"ion-padding-horizontal\" routerLink=\"/login\">Cancelar</ion-button>\n  </form>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content padding='true'>\n  <div class=\"vertical-center\">\n    <img src=\"assets/images/LogoCEC.png\" class=\"smallLogo\" />\n  </div>\n  <ion-text color=\"primary\" class=\"color-h3\">\n    <h3>Crear Cuenta</h3>\n  </ion-text>\n  <form>\n    <ion-list>\n      <ion-item>\n        <ion-label position=\"stacked\">Nombres</ion-label>\n        <ion-input [(ngModel)]=\"name\" name=\"nombre\" autocomplete=\"on\" type=\"email\"><ion-icon name=\"accessibility-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Correo electrónico</ion-label>\n        <ion-input [(ngModel)]=\"email\" autocomplete=\"on\" name=\"correo\" type=\"email\"><ion-icon name=\"mail-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Usuario</ion-label>\n        <ion-input [(ngModel)]=\"user\" autocomplete=\"off\" name=\"usuario\" type=\"text\"><ion-icon name=\"person-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Contraseña</ion-label>\n        <ion-input [(ngModel)]=\"pass\" autocomplete=\"off\" name=\"pass\" type=\"password\"><ion-icon name=\"finger-print-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">N° Celular</ion-label>\n        <ion-input [(ngModel)]=\"celular\" autocomplete=\"off\" name=\"celular\" type=\"number\"><ion-icon name=\"call-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item lines='none'>\n        ¿Ya tienes una cuenta? <a routerLink='/login'> Inicia Sesión</a>\n      </ion-item>\n    </ion-list>\n    <ion-button expand=\"block\" share=\"round\" color=\"primary\" class=\"ion-padding-horizontal\" routerLink=\"/educ/home/\" (click)=\"registrar()\">Registrar</ion-button>\n    <ion-button expand=\"block\" share=\"round\" color=\"medium\" class=\"ion-padding-horizontal\" routerLink=\"/login\">Cancelar</ion-button>\n  </form>\n</ion-content>");
 
 /***/ }),
 
@@ -117,11 +117,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupPage", function() { return SignupPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 let SignupPage = class SignupPage {
-    constructor() { }
+    constructor() {
+        this.name = "";
+        this.pass = "";
+        this.user = "";
+        this.email = "";
+    }
     ngOnInit() {
+    }
+    registrar() {
+        this.data = {
+            nombres: this.name,
+            pass: this.pass,
+            user: this.user,
+            email: this.email,
+            celular: this.celular,
+            id_user: Date.now()
+        };
+        var self = this;
+        jquery__WEBPACK_IMPORTED_MODULE_2__["getJSON"]("https://prueba-63695.firebaseio.com/usuarios.json", function (data) {
+            var x = data.length;
+            jquery__WEBPACK_IMPORTED_MODULE_2__["ajax"]({
+                url: 'https://prueba-63695.firebaseio.com/usuarios/' + x + '.json',
+                data: JSON.stringify(self.data),
+                type: 'PATCH',
+                contentType: 'application/json',
+                processData: false,
+                dataType: 'json'
+            });
+        });
     }
 };
 SignupPage.ctorParameters = () => [];
