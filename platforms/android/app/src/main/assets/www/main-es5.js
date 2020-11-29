@@ -237,7 +237,7 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | cursos-cursos-module */
-          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("cursos-cursos-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("cursos-cursos-module")]).then(__webpack_require__.bind(null,
           /*! ./cursos/cursos.module */
           "./src/app/cursos/cursos.module.ts")).then(function (m) {
             return m.CursosPageModule;
@@ -246,9 +246,9 @@
       }, {
         path: 'notificaciones',
         loadChildren: function loadChildren() {
-          return __webpack_require__.e(
+          return Promise.all(
           /*! import() | notificaciones-notificaciones-module */
-          "notificaciones-notificaciones-module").then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("notificaciones-notificaciones-module")]).then(__webpack_require__.bind(null,
           /*! ./notificaciones/notificaciones.module */
           "./src/app/notificaciones/notificaciones.module.ts")).then(function (m) {
             return m.NotificacionesPageModule;
@@ -259,7 +259,7 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-login-login-module */
-          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("pages-login-login-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("pages-login-login-module")]).then(__webpack_require__.bind(null,
           /*! ./pages/login/login.module */
           "./src/app/pages/login/login.module.ts")).then(function (m) {
             return m.LoginPageModule;
@@ -270,7 +270,7 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-signup-signup-module */
-          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("pages-signup-signup-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("pages-signup-signup-module")]).then(__webpack_require__.bind(null,
           /*! ./pages/signup/signup.module */
           "./src/app/pages/signup/signup.module.ts")).then(function (m) {
             return m.SignupPageModule;
@@ -292,10 +292,21 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | detalle-curso-detalle-curso-module */
-          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("detalle-curso-detalle-curso-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("detalle-curso-detalle-curso-module")]).then(__webpack_require__.bind(null,
           /*! ./detalle-curso/detalle-curso.module */
           "./src/app/detalle-curso/detalle-curso.module.ts")).then(function (m) {
             return m.DetalleCursoPageModule;
+          });
+        }
+      }, {
+        path: 'sugerencias',
+        loadChildren: function loadChildren() {
+          return Promise.all(
+          /*! import() | sugerencias-sugerencias-module */
+          [__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("sugerencias-sugerencias-module")]).then(__webpack_require__.bind(null,
+          /*! ./sugerencias/sugerencias.module */
+          "./src/app/sugerencias/sugerencias.module.ts")).then(function (m) {
+            return m.SugerenciasPageModule;
           });
         }
       }];
@@ -456,6 +467,12 @@
 
             if (index == 3) {
               this.router.navigate(["educ/contacto/"]);
+              this.menu.close();
+            }
+
+            if (index == 2) {
+              this.router.navigate(["educ/sugerencias/"]);
+              this.menu.close();
             }
           }
         }, {
@@ -860,7 +877,8 @@
 
 
       var environment = {
-        production: false
+        production: false,
+        url: "http://192.168.1.14:8000/"
       };
       var firebaseConfig = {
         apiKey: "AIzaSyB_hL5iWX0KJLatm3Lrrqv-9qu6RIUzZz0",
@@ -943,7 +961,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       module.exports = __webpack_require__(
-      /*! C:\Users\david\Desktop\app_eduacion_continua-main\src\main.ts */
+      /*! C:\Users\david\Desktop\app_educacion_continua-main\src\main.ts */
       "./src/main.ts");
       /***/
     }

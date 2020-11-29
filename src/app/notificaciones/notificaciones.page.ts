@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import * as $ from "jquery";
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-notificaciones',
@@ -28,7 +29,7 @@ export class NotificacionesPage implements OnInit {
     var data = {
       "id": this.App.id_User
     }
-    await $.post("http://127.0.0.1:8000/api/notificaciones_participante/", data).done(function (notificacion) {
+    await $.post(environment.url+"api/notificaciones_participante/", data).done(function (notificacion) {
       if (!notificacion.error) {
         self.listNotificaciones = notificacion.notificaciones
 

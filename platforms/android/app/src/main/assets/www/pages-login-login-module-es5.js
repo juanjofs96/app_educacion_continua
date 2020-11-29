@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-content>\n  <div class=\"vertical-center\">\n    <img src=\"assets/images/LogoCEC.png\" class=\"smallLogo\" />\n  </div>\n  <ion-text color=\"primary\" class=\"color-h3\">\n    <h3>Iniciar Sesión</h3>\n  </ion-text>\n  <form>\n    <ion-list>\n      <ion-item>\n        <ion-label position=\"stacked\">Correo electrónico</ion-label>\n        <ion-input [(ngModel)]=\"email\" name=\"correo\" autocomplete=\"on\" type=\"email\"><ion-icon name=\"mail-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Contraseña</ion-label>\n        <ion-input [(ngModel)]=\"pass\" autocomplete=\"off\" name=\"clave\" type=\"password\"><ion-icon name=\"finger-print-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item lines=\"none\">\n        <a routerLink=\"/educ/home/\">No iniciar sesión</a>\n      </ion-item>\n    </ion-list>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" (click)=\"login()\">Iniciar Sesión</ion-button>\n  </form>\n\n  <!--header class=\"ion-padding-start ion-padding-top\"></!--header-->\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"loginFacebook()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-facebook\"></ion-icon>\n    Iniciar Sesión con Facebook\n  </ion-button>\n\n  <ion-button expand=\"block\" color=\"danger\" (click)=\"loginGoogle()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-google\"></ion-icon>\n    Iniciar Sesión con Google\n  </ion-button>\n\n  <section>\n    <header class=\"ion-padding-start ion-padding-top\">¿Eres nuevo?</header>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" routerLink=\"/signup\">\n      Crear nueva cuenta</ion-button>\n  </section>\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-content>\n  <div class=\"vertical-center\">\n    <img src=\"assets/images/LogoCEC.png\" class=\"smallLogo\" />\n  </div>\n  <ion-text color=\"primary\" class=\"color-h3\">\n    <h3>Iniciar Sesión</h3>\n  </ion-text>\n    <ion-list>\n      <ion-item>\n        <ion-label position=\"stacked\">Correo electrónico</ion-label>\n        <ion-input [(ngModel)]=\"email\" name=\"correo\" autocomplete=\"on\" type=\"email\"><ion-icon name=\"mail-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Contraseña</ion-label>\n        <ion-input [(ngModel)]=\"pass\" autocomplete=\"off\" name=\"clave\" type=\"password\"><ion-icon name=\"keypad-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item lines=\"none\">\n        <a routerLink=\"/educ/home/\" slot=\"end\">No iniciar sesión</a>\n      </ion-item>\n    </ion-list>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" (click)=\"login()\">Iniciar Sesión</ion-button>\n\n  <!--header class=\"ion-padding-start ion-padding-top\"></!--header-->\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"loginFacebook()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-facebook\"></ion-icon>\n    Iniciar Sesión con Facebook\n  </ion-button>\n\n  <ion-button expand=\"block\" color=\"danger\" (click)=\"loginGoogle()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-google\"></ion-icon>\n    Iniciar Sesión con Google\n  </ion-button>\n\n  <section>\n    <header class=\"ion-padding-start ion-padding-top\">¿Eres nuevo?</header>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" routerLink=\"/signup\">\n      Crear nueva cuenta</ion-button>\n  </section>\n</ion-content>";
       /***/
     },
 
@@ -266,41 +266,56 @@
 
 
       var jquery__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_9__);
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! ../../../environments/environment */
+      "./src/environments/environment.ts");
 
       var LoginPage = /*#__PURE__*/function () {
-        function LoginPage(router, platform, google, loadingController, fireAuth, fb, App, alertController) {
+        function LoginPage(router, platform, google, fireAuth, fb, App, alertController) {
           _classCallCheck(this, LoginPage);
 
           this.router = router;
           this.platform = platform;
           this.google = google;
-          this.loadingController = loadingController;
           this.fireAuth = fireAuth;
           this.fb = fb;
           this.App = App;
           this.alertController = alertController;
           this.email = "";
           this.pass = "";
-          this.noExiste = true;
         }
 
         _createClass(LoginPage, [{
           key: "ngOnInit",
-          value: function ngOnInit() {
+          value: function ngOnInit() {}
+        }, {
+          key: "login",
+          value: function login() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var data, self;
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
-                      _context.next = 2;
-                      return this.loadingController.create({
-                        message: 'Connecting ...'
+                      data = {
+                        "correo": this.email,
+                        "clave": this.pass
+                      };
+                      self = this;
+                      _context.next = 4;
+                      return jquery__WEBPACK_IMPORTED_MODULE_9__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "api/login_participante/", data).done(function (user) {
+                        if (!user.error) {
+                          self.App.id_User = user.id;
+                          self.habilitarOpciones();
+                        } else {
+                          self.alertError(user.mensaje, "Credenciales incorrectas");
+                        }
                       });
 
-                    case 2:
-                      this.loading = _context.sent;
-
-                    case 3:
+                    case 4:
                     case "end":
                       return _context.stop();
                   }
@@ -309,98 +324,54 @@
             }));
           }
         }, {
-          key: "presentLoading",
-          value: function presentLoading(loading) {
+          key: "verificarCuenta",
+          value: function verificarCuenta(res) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var self, data;
               return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
-                      _context2.next = 2;
-                      return loading.present();
+                      self = this;
+                      data = {
+                        "correo": res['email'],
+                        "nombres": res['given_name'],
+                        "apellidos": res['family_name']
+                      };
+                      _context2.next = 4;
+                      return jquery__WEBPACK_IMPORTED_MODULE_9__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "api/existe_participante/", data).done(function (user) {
+                        if (!user.error) {
+                          self.App.id_User = user.id;
+                          self.habilitarOpciones();
+                        } else {
+                          var navigationExtras = {
+                            queryParams: {
+                              user: JSON.stringify(data)
+                            }
+                          };
+                          self.alertError("Complete los datos faltantes para completar su registro", "Inicio exitoso");
+                          self.router.navigate(["/signup/"], navigationExtras);
+                        }
+                      });
 
-                    case 2:
+                    case 4:
                     case "end":
                       return _context2.stop();
                   }
                 }
-              }, _callee2);
-            }));
-          }
-        }, {
-          key: "login",
-          value: function login() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var self;
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) {
-                  switch (_context3.prev = _context3.next) {
-                    case 0:
-                      self = this;
-                      _context3.next = 3;
-                      return jquery__WEBPACK_IMPORTED_MODULE_9__["getJSON"]("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
-                        for (var i = 0; i < data_users.length; i++) {
-                          if (data_users[i].email == self.email && data_users[i].pass == self.pass) {
-                            self.noExiste = false;
-                            self.App.id_User = data_users[i].id_user;
-                            self.habilitarOpciones();
-                            break;
-                          }
-                        }
-
-                        if (self.noExiste) self.alertError("Su correo o contraseña son incorrectos");
-                      });
-
-                    case 3:
-                    case "end":
-                      return _context3.stop();
-                  }
-                }
-              }, _callee3, this);
-            }));
-          }
-        }, {
-          key: "verificarCuenta",
-          value: function verificarCuenta(user) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var self;
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) {
-                  switch (_context4.prev = _context4.next) {
-                    case 0:
-                      self = this;
-                      _context4.next = 3;
-                      return jquery__WEBPACK_IMPORTED_MODULE_9__["getJSON"]("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
-                        for (var i = 0; i < data_users.length; i++) {
-                          if (data_users[i].email == user) {
-                            self.noExiste = false;
-                            self.App.id_User = data_users[i].id_user;
-                            self.habilitarOpciones();
-                            break;
-                          }
-                        }
-
-                        if (self.noExiste) self.alertError("No se encuentra registrado");
-                      });
-
-                    case 3:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4, this);
+              }, _callee2, this);
             }));
           }
         }, {
           key: "loginGoogle",
           value: function loginGoogle() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
               var _this = this;
 
               var params;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
-                  switch (_context5.prev = _context5.next) {
+                  switch (_context3.prev = _context3.next) {
                     case 0:
                       if (this.platform.is('android')) {
                         params = {
@@ -422,10 +393,10 @@
 
                     case 1:
                     case "end":
-                      return _context5.stop();
+                      return _context3.stop();
                   }
                 }
-              }, _callee5, this);
+              }, _callee3, this);
             }));
           }
         }, {
@@ -440,82 +411,79 @@
         }, {
           key: "loginGoogleWeb",
           value: function loginGoogleWeb() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-              var res, email;
-              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var res;
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
-                  switch (_context6.prev = _context6.next) {
+                  switch (_context4.prev = _context4.next) {
                     case 0:
-                      _context6.next = 2;
+                      _context4.next = 2;
                       return this.fireAuth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].GoogleAuthProvider());
 
                     case 2:
-                      res = _context6.sent;
-                      email = res.user.email;
-                      this.verificarCuenta(email);
+                      res = _context4.sent;
+                      this.verificarCuenta(res.additionalUserInfo.profile);
 
-                    case 5:
+                    case 4:
                     case "end":
-                      return _context6.stop();
+                      return _context4.stop();
                   }
                 }
-              }, _callee6, this);
+              }, _callee4, this);
             }));
           }
         }, {
           key: "loginFacebookAndroid",
           value: function loginFacebookAndroid() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              var res, facebookCredential, resConfirmed, email;
-              return regeneratorRuntime.wrap(function _callee7$(_context7) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var res, facebookCredential, resConfirmed;
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context7.prev = _context7.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
-                      _context7.next = 2;
+                      _context5.next = 2;
                       return this.fb.login(['public_profile', 'email']);
 
                     case 2:
-                      res = _context7.sent;
+                      res = _context5.sent;
                       facebookCredential = firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].FacebookAuthProvider.credential(res.authResponse.accessToken);
-                      _context7.next = 6;
+                      _context5.next = 6;
                       return this.fireAuth.auth.signInWithCredential(facebookCredential);
 
                     case 6:
-                      resConfirmed = _context7.sent;
-                      email = resConfirmed.user.email;
-                      this.verificarCuenta(email);
+                      resConfirmed = _context5.sent;
+                      this.verificarCuenta(resConfirmed.additionalUserInfo.profile);
 
-                    case 9:
+                    case 8:
                     case "end":
-                      return _context7.stop();
+                      return _context5.stop();
                   }
                 }
-              }, _callee7, this);
+              }, _callee5, this);
             }));
           }
         }, {
           key: "loginFacebookWeb",
           value: function loginFacebookWeb() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var res, email;
-              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              var res;
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
-                  switch (_context8.prev = _context8.next) {
+                  switch (_context6.prev = _context6.next) {
                     case 0:
-                      _context8.next = 2;
+                      _context6.next = 2;
                       return this.fireAuth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].FacebookAuthProvider());
 
                     case 2:
-                      res = _context8.sent;
-                      email = res.user.email;
-                      this.verificarCuenta(email);
+                      res = _context6.sent;
+                      this.verificarCuenta(res.additionalUserInfo.profile);
 
-                    case 5:
+                    case 4:
                     case "end":
-                      return _context8.stop();
+                      return _context6.stop();
                   }
                 }
-              }, _callee8, this);
+              }, _callee6, this);
             }));
           }
         }, {
@@ -525,17 +493,8 @@
 
             var credential = accessSecret ? firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].GoogleAuthProvider.credential(accessToken, accessSecret) : firebase_app__WEBPACK_IMPORTED_MODULE_5__["auth"].GoogleAuthProvider.credential(accessToken);
             this.fireAuth.auth.signInWithCredential(credential).then(function (response) {
-              var email = response.user.email;
-
-              _this2.verificarCuenta(email);
-
-              _this2.loading.dismiss();
+              _this2.verificarCuenta(response.additionalUserInfo.profile);
             });
-          }
-        }, {
-          key: "onLoginError",
-          value: function onLoginError(err) {
-            console.log(err);
           }
         }, {
           key: "habilitarOpciones",
@@ -554,32 +513,31 @@
           }
         }, {
           key: "alertError",
-          value: function alertError(msg) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+          value: function alertError(msg, msg2) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+              return regeneratorRuntime.wrap(function _callee7$(_context7) {
                 while (1) {
-                  switch (_context9.prev = _context9.next) {
+                  switch (_context7.prev = _context7.next) {
                     case 0:
-                      _context9.next = 2;
+                      _context7.next = 2;
                       return this.alertController.create({
-                        header: 'Mensaje',
-                        subHeader: 'Credenciales incorrectas',
+                        header: msg2,
                         message: msg,
                         buttons: ['OK']
                       });
 
                     case 2:
-                      alert = _context9.sent;
-                      _context9.next = 5;
+                      alert = _context7.sent;
+                      _context7.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context9.stop();
+                      return _context7.stop();
                   }
                 }
-              }, _callee9, this);
+              }, _callee7, this);
             }));
           }
         }]);
@@ -594,8 +552,6 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"]
         }, {
           type: _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_3__["GooglePlus"]
-        }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"]
         }, {
           type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"]
         }, {

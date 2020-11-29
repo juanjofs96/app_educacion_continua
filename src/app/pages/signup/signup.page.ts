@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery";
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -49,7 +50,7 @@ export class SignupPage implements OnInit {
     var self = this;
     var validado = this.validarCampos();
     if (validado && this.verificado) {
-      $.post("http://127.0.0.1:8000/api/participante/", this.data)
+      $.post(environment.url+"api/participante/", this.data)
         .done(function (data) {
           self.alertError("Registro exitoso", "Su cuenta se ha creado exitosamente");
           self.route.navigate(["/educ/home/"]);

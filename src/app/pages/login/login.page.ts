@@ -8,6 +8,7 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { AppComponent } from "../../app.component";
 import * as $ from "jquery";
 import { AlertController } from '@ionic/angular';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -42,7 +43,7 @@ ngOnInit() {
       "clave":this.pass
     }
     var self = this;
-    await $.post("http://localhost:8000/api/login_participante/",data).done(function (user) {
+    await $.post(environment.url+"api/login_participante/",data).done(function (user) {
           if(!user.error){
             self.App.id_User = user.id;
             self.habilitarOpciones();
@@ -61,7 +62,7 @@ ngOnInit() {
       "nombres":res['given_name'],
       "apellidos":res['family_name']
     }
-    await $.post("http://localhost:8000/api/existe_participante/",data).done( function (user) {
+    await $.post(environment.url+"api/existe_participante/",data).done( function (user) {
           if(!user.error){
             self.App.id_User = user.id;
             self.habilitarOpciones();

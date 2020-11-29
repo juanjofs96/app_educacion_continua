@@ -31,16 +31,16 @@ const routes = [
                 path: 'cursos',
                 children: [{
                         path: "",
-                        loadChildren: () => Promise.all(/*! import() | cursos-cursos-module */[__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("cursos-cursos-module")]).then(__webpack_require__.bind(null, /*! ../cursos/cursos.module */ "./src/app/cursos/cursos.module.ts")).then(m => m.CursosPageModule),
+                        loadChildren: () => Promise.all(/*! import() | cursos-cursos-module */[__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("cursos-cursos-module")]).then(__webpack_require__.bind(null, /*! ../cursos/cursos.module */ "./src/app/cursos/cursos.module.ts")).then(m => m.CursosPageModule),
                     },
                     {
                         path: ':id_curso',
-                        loadChildren: () => Promise.all(/*! import() | detalle-curso-detalle-curso-module */[__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~pages-login-login-module~pages-signu~0f0cd9ed"), __webpack_require__.e("detalle-curso-detalle-curso-module")]).then(__webpack_require__.bind(null, /*! ../detalle-curso/detalle-curso.module */ "./src/app/detalle-curso/detalle-curso.module.ts")).then(m => m.DetalleCursoPageModule)
+                        loadChildren: () => Promise.all(/*! import() | detalle-curso-detalle-curso-module */[__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("detalle-curso-detalle-curso-module")]).then(__webpack_require__.bind(null, /*! ../detalle-curso/detalle-curso.module */ "./src/app/detalle-curso/detalle-curso.module.ts")).then(m => m.DetalleCursoPageModule)
                     }]
             },
             {
                 path: 'notificaciones',
-                loadChildren: () => __webpack_require__.e(/*! import() | notificaciones-notificaciones-module */ "notificaciones-notificaciones-module").then(__webpack_require__.bind(null, /*! ../notificaciones/notificaciones.module */ "./src/app/notificaciones/notificaciones.module.ts")).then(m => m.NotificacionesPageModule)
+                loadChildren: () => Promise.all(/*! import() | notificaciones-notificaciones-module */[__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("notificaciones-notificaciones-module")]).then(__webpack_require__.bind(null, /*! ../notificaciones/notificaciones.module */ "./src/app/notificaciones/notificaciones.module.ts")).then(m => m.NotificacionesPageModule)
             },
             {
                 path: 'encuestas',
@@ -49,6 +49,10 @@ const routes = [
             {
                 path: 'contacto',
                 loadChildren: () => __webpack_require__.e(/*! import() | contacto-contacto-module */ "contacto-contacto-module").then(__webpack_require__.bind(null, /*! ../contacto/contacto.module */ "./src/app/contacto/contacto.module.ts")).then(m => m.ContactoPageModule)
+            },
+            {
+                path: 'sugerencias',
+                loadChildren: () => Promise.all(/*! import() | sugerencias-sugerencias-module */[__webpack_require__.e("default~cursos-cursos-module~detalle-curso-detalle-curso-module~notificaciones-notificaciones-module~ae7a5e1c"), __webpack_require__.e("sugerencias-sugerencias-module")]).then(__webpack_require__.bind(null, /*! ../sugerencias/sugerencias.module */ "./src/app/sugerencias/sugerencias.module.ts")).then(m => m.SugerenciasPageModule)
             },
             {
                 path: '',

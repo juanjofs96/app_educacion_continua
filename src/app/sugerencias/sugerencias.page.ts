@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { AppComponent } from '../app.component';
 import * as $ from "jquery";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-sugerencias',
@@ -18,6 +19,7 @@ export class SugerenciasPage implements OnInit {
   constructor(private App: AppComponent, private alertController: AlertController) {
     this.mensaje = "";
     this.asunto = "";
+    $('input[type=file]').val('');
   }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class SugerenciasPage implements OnInit {
     this.data.append("mensaje", this.mensaje);
     var self = this;
     $.ajax({
-      url: "http://localhost:8000/api/sugerencias/",
+      url: environment.url + "api/sugerencias/",
       data: this.data,
       processData: false,
       contentType: false,
@@ -43,6 +45,7 @@ export class SugerenciasPage implements OnInit {
         self.alertError("Sugerencia enviada", "Gracias, su sugerencia fue recibida");
         self.mensaje = "";
         self.asunto = "";
+        $('input[type=file]').val('');
       },
       error: function (error) {
         console.log(error)
