@@ -4,7 +4,6 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Platform } from '@ionic/angular';
-import { LoadingController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { AppComponent } from "../../app.component";
 import * as $ from "jquery";
@@ -25,7 +24,6 @@ export class LoginPage implements OnInit {
     private router: Router,
     private platform: Platform,
     private google: GooglePlus,
-    public loadingController: LoadingController,
     private fireAuth: AngularFireAuth,
     private fb: Facebook,
     private App: AppComponent,
@@ -34,15 +32,8 @@ export class LoginPage implements OnInit {
   
   }
 
-  async ngOnInit() {
-    this.loading = await this.loadingController.create({
-      message: 'Connecting ...'
-    });
-  }
+ngOnInit() {
 
-
-  async presentLoading(loading) {
-    await loading.present();
   }
 
   async login() {
@@ -108,7 +99,6 @@ export class LoginPage implements OnInit {
     }
   }
 
-
   loginFacebook() {
     if (this.platform.is('android')) {
       this.loginFacebookAndroid();
@@ -141,12 +131,9 @@ export class LoginPage implements OnInit {
     this.fireAuth.auth.signInWithCredential(credential)
       .then((response) => {
         this.verificarCuenta(response.additionalUserInfo.profile);
-        this.loading.dismiss();
       })
   }
-  onLoginError(err) {
-    console.log(err);
-  }
+
 
 
   habilitarOpciones() {
