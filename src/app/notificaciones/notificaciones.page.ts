@@ -29,10 +29,12 @@ export class NotificacionesPage implements OnInit {
     var data = {
       "id": this.App.id_User
     }
-    await $.post(environment.url+"api/notificaciones_participante/", data).done(function (notificacion) {
+    await $.post(environment.url+"/api/notificaciones_participante/", data).done(function (notificacion) {
       if (!notificacion.error) {
         self.listNotificaciones = notificacion.notificaciones
-
+        for(let i=0; i< self.listNotificaciones.length;i++){
+          self.listNotificaciones[i].imagen=environment.url+self.listNotificaciones[i].imagen
+        }
       }
       else {
         self.alertNotificacion(notificacion.mensaje)

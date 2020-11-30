@@ -50,7 +50,7 @@ export class SignupPage implements OnInit {
     var self = this;
     var validado = this.validarCampos();
     if (validado && this.verificado) {
-      $.post(environment.url+"api/participante/", this.data)
+      $.post(environment.url+"/api/participante/", this.data)
         .done(function (data) {
           self.alertError("Registro exitoso", "Su cuenta se ha creado exitosamente");
           self.route.navigate(["/educ/home/"]);

@@ -35,7 +35,7 @@ export class SugerenciasPage implements OnInit {
     this.data.append("mensaje", this.mensaje);
     var self = this;
     $.ajax({
-      url: environment.url + "api/sugerencias/",
+      url: environment.url + "/api/sugerencias/",
       data: this.data,
       processData: false,
       contentType: false,

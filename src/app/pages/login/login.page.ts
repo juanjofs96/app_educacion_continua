@@ -43,7 +43,8 @@ ngOnInit() {
       "clave":this.pass
     }
     var self = this;
-    await $.post(environment.url+"api/login_participante/",data).done(function (user) {
+    var url=environment.url+"/api/login_participante/"
+    await $.post(url,data).done(function (user) {
           if(!user.error){
             self.App.id_User = user.id;
             self.habilitarOpciones();
@@ -62,7 +63,7 @@ ngOnInit() {
       "nombres":res['given_name'],
       "apellidos":res['family_name']
     }
-    await $.post(environment.url+"api/existe_participante/",data).done( function (user) {
+    await $.post(environment.url+"/api/existe_participante/",data).done( function (user) {
           if(!user.error){
             self.App.id_User = user.id;
             self.habilitarOpciones();
