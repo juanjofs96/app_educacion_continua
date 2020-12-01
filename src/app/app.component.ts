@@ -20,16 +20,16 @@ export class AppComponent {
   { item: "Encuestas", disable: true, tab: "encuestas", icon: "bar-chart" }];
   public estadoUser: boolean;
   public id_User:string;
-
+  private permitido : boolean
   constructor(
     private alertController: AlertController,
     private router: Router,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private menu: MenuController,
+    private menu: MenuController
   ) {
-
+    this.permitido=true;
     this.initializeApp();
   }
 
@@ -41,13 +41,20 @@ export class AppComponent {
   }
 
   verificar(index: number) {
-    if (this.listMenu[index].disable) this.alertLogin();
-    if (index == 3) {
+    if (this.listMenu[index].disable){
+      this.alertLogin();
+      this.permitido=false;
+    }
+    else{
+      this.permitido=true;
+    }
+
+    if (index == 3 && this.permitido) {
       this.router.navigate(["educ/contacto/"]);
       this.menu.close();
 
     }
-    if (index == 2) {
+    if (index == 2 && this.permitido) {
       this.router.navigate(["educ/sugerencias/"]);
       this.menu.close();
     }
