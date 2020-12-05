@@ -9,14 +9,14 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let list of listCursos" [routerLink]="['/educ/cursos',list.id_curso]">
+    <ion-item *ngFor="let list of listCursos" [routerLink]="['/educ/cursos',list.codigo_evento]">
       <ion-avatar slot="start">
         <ion-img [src]="list.imagen"></ion-img>
       </ion-avatar>
       <ion-label>
-        <h3>{{list.titulo}}</h3>
-        <p>{{list.fecha}}</p>
-        <ion-text color="{{list.color}}">
+        <h3>{{list.nombre_curso}}</h3>
+        <p>{{list.fecha_inicio}}</p>
+        <ion-text color="red">
           <p>{{list.estado}}</p>
         </ion-text>
 

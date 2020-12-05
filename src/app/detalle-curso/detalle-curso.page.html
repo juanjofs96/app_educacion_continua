@@ -17,10 +17,10 @@
 
         <ion-row>
           <ion-col size="3">
-            <ion-img [src]="detalles.imagen" style="width: 100%; height: 100%;"></ion-img>
+           <ion-img [src]="detalles.imagen" style="width: 100%; height: 100%;"></ion-img>
           </ion-col>
           <ion-item>
-                <ion-card-title id="subtitle">{{detalles.titulo}}</ion-card-title>
+                <ion-card-title id="subtitle">{{detalles.nombre_curso}}</ion-card-title>
               </ion-item>
           <ion-col size="12">
             <ion-list lines="none">
@@ -29,10 +29,10 @@
                 <ion-label><b>Docente:</b> {{detalles.docente}}</ion-label>
               </ion-item>
               <ion-item>
-                <ion-label><b>Inicio:</b> {{detalles.inicio}}</ion-label>
+                <ion-label><b>Inicio:</b> {{detalles.fecha_inicio}}</ion-label>
               </ion-item>
               <ion-item>
-                <ion-label><b>Fin:</b> {{detalles.fin}}</ion-label>
+                <ion-label><b>Fin:</b> {{detalles.fecha_fin}}</ion-label>
               </ion-item>
               <ion-item>
                 <ion-label><b>Estado:</b> {{detalles.estado}}</ion-label>

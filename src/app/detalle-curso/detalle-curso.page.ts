@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CursosService } from '../cursos/cursos.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { AppComponent } from '../app.component';
+import * as $ from "jquery";
 
 
 const data_asistencias = {
@@ -40,7 +42,7 @@ const data_asistencias_line = {
   templateUrl: './detalle-curso.page.html',
   styleUrls: ['./detalle-curso.page.scss'],
 })
-export class DetalleCursoPage implements OnInit {
+export class DetalleCursoPage implements OnInit{
   private chart_asistencias: any;
   private chart_calificaciones: any;
   private chart_asistencias_line: any;
@@ -48,29 +50,38 @@ export class DetalleCursoPage implements OnInit {
   private mostrarAsistencia: boolean;
   private mostrarCalificaciones: boolean;
 
-
-
-  constructor(private router: ActivatedRoute, private cursos: CursosService) {
+  constructor(private router: ActivatedRoute,private App: AppComponent) {
     this.chart_asistencias = data_asistencias;
     this.chart_calificaciones = data_calificaciones;
     this.chart_asistencias_line = data_asistencias_line;
   }
 
-  ngOnInit() {
+
+  ionViewDidEnter() {
     this.mostrarAsistencia = true;
     this.mostrarCalificaciones = false;
-    this.router.paramMap.subscribe(paramMap => {
-      const id_curso = paramMap.get('id_curso');
-      this.getDetalle(id_curso);
-    })
+    /*this.router.paramMap.subscribe(async paramMap => {
+      await this.getDetalle(paramMap.get('codigo_evento'));
+    })*/
+    this.getDetalle(5030);
   }
-  
 
-  async getDetalle(id_curso: string) {
+  async getDetalle(id_curso:any) {
+    /*
     this.detalles = await this.cursos.getDetalleCurso(id_curso);
     this.chart_asistencias.data = this.detalles.data_asistencias;
     this.chart_calificaciones.data = this.detalles.data_calificaciones;
     this.chart_asistencias_line.data=this.detalles.data_asistencias_line;
+    */
+   var data = {"id_participante":this.App.id_User,"codigo_evento":id_curso}
+   var self=this;
+   await $.post(environment.url +"/api/detalles_curso/",data).done(function (res) {
+     if(!res.error){
+     self.detalles=res.detalles
+     self.detalles.imagen = environment.url + self.detalles.imagen
+     console.log(self.detalles)
+     }
+   })
   }
 
   segmentChanged(ev: any) {

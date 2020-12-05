@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery";
 import { AppComponent } from '../app.component';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-cursos',
@@ -12,38 +13,34 @@ import { Router } from '@angular/router';
 export class CursosPage {
 
   private listCursos = []
-  private find:boolean;
   constructor(private App: AppComponent, private alertController: AlertController,private router:Router) {
     
   }
 
   ionViewDidEnter() {
     this.listCursos = []
-    this.find=false;
-    if(this.App.id_User!=null) {
+    
+    if (this.App.id_User != null) {
       this.getCursos();
     }
+   
   }
+  
   async getCursos() {
-    var self = this;
-    await $.getJSON("https://prueba-63695.firebaseio.com/cursos.json", function (data_cursos) {
-      $.getJSON("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
-        for (let i = 0; i < data_users.length; i++) {
-            for (let j = 0; j < data_cursos.length; j++) {
-              if (data_users[i].id_user == data_cursos[j].id_user && data_users[i].id_user == self.App.id_User) {
-                self.listCursos.push(data_cursos[j]);
-                self.find=true;
-              }
-            }
-        }
-        if(!self.find){
-          self.alertCurso();
-        }
-      })
+    var data = {"id_participante":this.App.id_User}
+    var self=this;
+    await $.post(environment.url +"/api/cursos_participante/",data).done(function (res) {
+      if(!res.error){
+      self.listCursos=res.cursos
+      for (let i = 0; i < self.listCursos.length; i++) {
+        self.listCursos[i].imagen = environment.url + self.listCursos[i].imagen
+      }
+      }
+      else{
+        self.alertCurso();
+      }
     })
-    
   }
-
 
 
   async alertCurso() {
