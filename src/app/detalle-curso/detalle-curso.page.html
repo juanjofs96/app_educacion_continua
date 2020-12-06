@@ -14,36 +14,24 @@
 
     <ion-card-content>
       <ion-grid>
-
         <ion-row>
           <ion-col size="3">
-           <ion-img [src]="detalles.imagen" style="width: 100%; height: 100%;"></ion-img>
+            <ion-img [src]="detalles.imagen" style="width: 100%; height: 100%;"></ion-img>
           </ion-col>
-          <ion-item>
-                <ion-card-title id="subtitle">{{detalles.nombre_curso}}</ion-card-title>
-              </ion-item>
-          <ion-col size="12">
-            <ion-list lines="none">
-              
-              <ion-item>
-                <ion-label><b>Docente:</b> {{detalles.docente}}</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label><b>Inicio:</b> {{detalles.fecha_inicio}}</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label><b>Fin:</b> {{detalles.fecha_fin}}</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label><b>Estado:</b> {{detalles.estado}}</ion-label>
-              </ion-item>
-            </ion-list>
+          <ion-col size="9">
+            <div class="list_items">
+              <ion-card-title id="subtitle">{{detalles.nombre_curso}}</ion-card-title>
+
+              <ion-text><p><b>Docente:</b> {{detalles.docente}}</p></ion-text>
+
+              <ion-text><p><b>Inicio:</b> {{detalles.fecha_inicio}}</p></ion-text>
+
+              <ion-text><p><b>Fin:</b> {{detalles.fecha_fin}}</p></ion-text>
+
+              <ion-text><p><b>Estado:</b> {{detalles.estado}}</p></ion-text>
+
+            </div>
           </ion-col>
-          <!--ion-col>
-            <ion-button fill="outline" s>
-              <ion-icon name="mail-outline"></ion-icon>
-            </ion-button>
-          </ion-col-->
         </ion-row>
       </ion-grid>
     </ion-card-content>
@@ -109,8 +97,7 @@
 
         <ion-row *ngIf="mostrarAsistencia">
           <ion-col size="12">
-            <fusioncharts width="100%" height="300" type="line" dataFormat="json"
-              [dataSource]="chart_asistencias_line">
+            <fusioncharts width="100%" height="300" type="line" dataFormat="json" [dataSource]="chart_asistencias_line">
             </fusioncharts>
           </ion-col>
         </ion-row>

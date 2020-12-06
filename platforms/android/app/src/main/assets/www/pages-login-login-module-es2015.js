@@ -161,7 +161,8 @@ let LoginPage = class LoginPage {
                 "clave": this.pass
             };
             var self = this;
-            yield jquery__WEBPACK_IMPORTED_MODULE_9__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "api/login_participante/", data).done(function (user) {
+            var url = _environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "/api/login_participante/";
+            yield jquery__WEBPACK_IMPORTED_MODULE_9__["post"](url, data).done(function (user) {
                 if (!user.error) {
                     self.App.id_User = user.id;
                     self.habilitarOpciones();
@@ -180,7 +181,7 @@ let LoginPage = class LoginPage {
                 "nombres": res['given_name'],
                 "apellidos": res['family_name']
             };
-            yield jquery__WEBPACK_IMPORTED_MODULE_9__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "api/existe_participante/", data).done(function (user) {
+            yield jquery__WEBPACK_IMPORTED_MODULE_9__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "/api/existe_participante/", data).done(function (user) {
                 if (!user.error) {
                     self.App.id_User = user.id;
                     self.habilitarOpciones();

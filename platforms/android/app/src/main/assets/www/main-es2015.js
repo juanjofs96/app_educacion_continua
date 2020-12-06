@@ -410,6 +410,7 @@ let AppComponent = class AppComponent {
         this.listTabs = [{ item: "Home", disable: false, tab: "home", icon: "home" }, { item: "Mis Cursos", disable: true, tab: "cursos", icon: "school" },
             { item: "Notificaciones", disable: true, tab: "notificaciones", icon: "notifications" },
             { item: "Encuestas", disable: true, tab: "encuestas", icon: "bar-chart" }];
+        this.permitido = true;
         this.initializeApp();
     }
     initializeApp() {
@@ -419,13 +420,18 @@ let AppComponent = class AppComponent {
         });
     }
     verificar(index) {
-        if (this.listMenu[index].disable)
+        if (this.listMenu[index].disable) {
             this.alertLogin();
-        if (index == 3) {
+            this.permitido = false;
+        }
+        else {
+            this.permitido = true;
+        }
+        if (index == 3 && this.permitido) {
             this.router.navigate(["educ/contacto/"]);
             this.menu.close();
         }
-        if (index == 2) {
+        if (index == 2 && this.permitido) {
             this.router.navigate(["educ/sugerencias/"]);
             this.menu.close();
         }
@@ -643,7 +649,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    url: "http://192.168.1.14:8000/"
+    url: "http://157.230.227.213"
 };
 const firebaseConfig = {
     apiKey: "AIzaSyB_hL5iWX0KJLatm3Lrrqv-9qu6RIUzZz0",

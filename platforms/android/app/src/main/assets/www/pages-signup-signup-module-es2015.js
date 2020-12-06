@@ -167,7 +167,7 @@ let SignupPage = class SignupPage {
         var self = this;
         var validado = this.validarCampos();
         if (validado && this.verificado) {
-            jquery__WEBPACK_IMPORTED_MODULE_2__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url + "api/participante/", this.data)
+            jquery__WEBPACK_IMPORTED_MODULE_2__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url + "/api/participante/", this.data)
                 .done(function (data) {
                 self.alertError("Registro exitoso", "Su cuenta se ha creado exitosamente");
                 self.route.navigate(["/educ/home/"]);

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar class=\"toolhead\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Mis Cursos</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let list of listCursos\" [routerLink]=\"['/educ/cursos',list.id_curso]\">\n      <ion-avatar slot=\"start\">\n        <ion-img [src]=\"list.imagen\"></ion-img>\n      </ion-avatar>\n      <ion-label>\n        <h3>{{list.titulo}}</h3>\n        <p>{{list.fecha}}</p>\n        <ion-text color=\"{{list.color}}\">\n          <p>{{list.estado}}</p>\n        </ion-text>\n\n      </ion-label>\n    </ion-item>\n  </ion-list>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar class=\"toolhead\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Mis Cursos</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item [routerLink]=\"['/educ/cursos',list.codigo_evento]\" *ngFor=\"let list of listCursos\" >\n        <ion-avatar slot=\"start\">\n          <ion-img [src]=\"list.imagen\"></ion-img>\n        </ion-avatar>\n        <ion-label>\n          <h3>{{list.nombre_curso}}</h3>\n          <p>{{list.fecha_inicio}}</p>\n          <ion-text color=\"red\">\n            <p>{{list.estado}}</p>\n          </ion-text>\n        </ion-label>\n    </ion-item>\n  </ion-list>\n</ion-content>");
 
 /***/ }),
 
@@ -122,6 +122,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -137,28 +139,24 @@ let CursosPage = class CursosPage {
     }
     ionViewDidEnter() {
         this.listCursos = [];
-        this.find = false;
         if (this.App.id_User != null) {
             this.getCursos();
         }
     }
     getCursos() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var data = { "id_participante": this.App.id_User };
             var self = this;
-            yield jquery__WEBPACK_IMPORTED_MODULE_2__["getJSON"]("https://prueba-63695.firebaseio.com/cursos.json", function (data_cursos) {
-                jquery__WEBPACK_IMPORTED_MODULE_2__["getJSON"]("https://prueba-63695.firebaseio.com/usuarios.json", function (data_users) {
-                    for (let i = 0; i < data_users.length; i++) {
-                        for (let j = 0; j < data_cursos.length; j++) {
-                            if (data_users[i].id_user == data_cursos[j].id_user && data_users[i].id_user == self.App.id_User) {
-                                self.listCursos.push(data_cursos[j]);
-                                self.find = true;
-                            }
-                        }
+            yield jquery__WEBPACK_IMPORTED_MODULE_2__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url + "/api/cursos_participante/", data).done(function (res) {
+                if (!res.error) {
+                    self.listCursos = res.cursos;
+                    for (let i = 0; i < self.listCursos.length; i++) {
+                        self.listCursos[i].imagen = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url + self.listCursos[i].imagen;
                     }
-                    if (!self.find) {
-                        self.alertCurso();
-                    }
-                });
+                }
+                else {
+                    self.alertCurso();
+                }
             });
         });
     }

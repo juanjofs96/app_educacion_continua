@@ -42,7 +42,7 @@ const data_asistencias_line = {
   templateUrl: './detalle-curso.page.html',
   styleUrls: ['./detalle-curso.page.scss'],
 })
-export class DetalleCursoPage implements OnInit{
+export class DetalleCursoPage{
   private chart_asistencias: any;
   private chart_calificaciones: any;
   private chart_asistencias_line: any;
@@ -60,20 +60,19 @@ export class DetalleCursoPage implements OnInit{
   ionViewDidEnter() {
     this.mostrarAsistencia = true;
     this.mostrarCalificaciones = false;
-    /*this.router.paramMap.subscribe(async paramMap => {
-      await this.getDetalle(paramMap.get('codigo_evento'));
-    })*/
-    this.getDetalle(5030);
+    this.router.params.subscribe(param => {
+    this.getDetalle(param['id_curso']);
+    })
   }
 
-  async getDetalle(id_curso:any) {
+  async getDetalle(codigo_evento:any) {
     /*
     this.detalles = await this.cursos.getDetalleCurso(id_curso);
     this.chart_asistencias.data = this.detalles.data_asistencias;
     this.chart_calificaciones.data = this.detalles.data_calificaciones;
     this.chart_asistencias_line.data=this.detalles.data_asistencias_line;
     */
-   var data = {"id_participante":this.App.id_User,"codigo_evento":id_curso}
+   var data = {"id_participante":this.App.id_User,"codigo_evento":codigo_evento}
    var self=this;
    await $.post(environment.url +"/api/detalles_curso/",data).done(function (res) {
      if(!res.error){

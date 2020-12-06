@@ -295,7 +295,7 @@
           key: "login",
           value: function login() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var data, self;
+              var data, self, url;
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
@@ -305,8 +305,9 @@
                         "clave": this.pass
                       };
                       self = this;
-                      _context.next = 4;
-                      return jquery__WEBPACK_IMPORTED_MODULE_9__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "api/login_participante/", data).done(function (user) {
+                      url = _environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "/api/login_participante/";
+                      _context.next = 5;
+                      return jquery__WEBPACK_IMPORTED_MODULE_9__["post"](url, data).done(function (user) {
                         if (!user.error) {
                           self.App.id_User = user.id;
                           self.habilitarOpciones();
@@ -315,7 +316,7 @@
                         }
                       });
 
-                    case 4:
+                    case 5:
                     case "end":
                       return _context.stop();
                   }
@@ -339,7 +340,7 @@
                         "apellidos": res['family_name']
                       };
                       _context2.next = 4;
-                      return jquery__WEBPACK_IMPORTED_MODULE_9__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "api/existe_participante/", data).done(function (user) {
+                      return jquery__WEBPACK_IMPORTED_MODULE_9__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].url + "/api/existe_participante/", data).done(function (user) {
                         if (!user.error) {
                           self.App.id_User = user.id;
                           self.habilitarOpciones();

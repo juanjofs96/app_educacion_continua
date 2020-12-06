@@ -447,6 +447,7 @@
             tab: "encuestas",
             icon: "bar-chart"
           }];
+          this.permitido = true;
           this.initializeApp();
         }
 
@@ -463,14 +464,19 @@
         }, {
           key: "verificar",
           value: function verificar(index) {
-            if (this.listMenu[index].disable) this.alertLogin();
+            if (this.listMenu[index].disable) {
+              this.alertLogin();
+              this.permitido = false;
+            } else {
+              this.permitido = true;
+            }
 
-            if (index == 3) {
+            if (index == 3 && this.permitido) {
               this.router.navigate(["educ/contacto/"]);
               this.menu.close();
             }
 
-            if (index == 2) {
+            if (index == 2 && this.permitido) {
               this.router.navigate(["educ/sugerencias/"]);
               this.menu.close();
             }
@@ -878,7 +884,7 @@
 
       var environment = {
         production: false,
-        url: "http://192.168.1.14:8000/"
+        url: "http://157.230.227.213"
       };
       var firebaseConfig = {
         apiKey: "AIzaSyB_hL5iWX0KJLatm3Lrrqv-9qu6RIUzZz0",
