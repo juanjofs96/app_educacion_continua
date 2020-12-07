@@ -11,5 +11,4 @@ export class ContactoPage implements OnInit {
 
   ngOnInit() {
   }
-
 }
