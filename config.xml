@@ -10,6 +10,7 @@
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
+    <access launch-external="yes" origin="whatsapp://*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
     <preference name="ScrollEnabled" value="false" />

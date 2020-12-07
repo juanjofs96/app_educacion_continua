@@ -30,6 +30,7 @@
               <ion-input type="file" class="form-control input-lg" accept="image/*" (change)="uploadImage($event)" name="imagen"></ion-input>
             </ion-col>
           </ion-item>
+          <ion-progress-bar [type]="'indeterminate'" *ngIf="showLoader"></ion-progress-bar>
           <div class="enviar_sugerencia">
             <ion-button type="button" (click)="enviarSugerencia()" style="width: 100%;">Enviar</ion-button>
           </div>

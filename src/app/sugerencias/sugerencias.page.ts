@@ -15,7 +15,7 @@ export class SugerenciasPage implements OnInit {
   private asunto: string;
   private data: FormData;
   private file: any;
-
+  private showLoader: boolean;
   constructor(private App: AppComponent, private alertController: AlertController) {
     this.mensaje = "";
     this.asunto = "";
@@ -27,6 +27,7 @@ export class SugerenciasPage implements OnInit {
   }
 
   enviarSugerencia() {
+    this.showProgressBar();
     this.data = new FormData;
     this.mensaje == "undefined" ? this.mensaje = null : null;
     this.file == null ? null : this.data.append("imagen", this.file);
@@ -46,9 +47,10 @@ export class SugerenciasPage implements OnInit {
         self.mensaje = "";
         self.asunto = "";
         $('input[type=file]').val('');
+        self.hideProgressBar();
       },
       error: function (error) {
-        console.log(error)
+        self.hideProgressBar();
         let x = error.responseJSON;
         let isError = false;
         try {
@@ -61,6 +63,14 @@ export class SugerenciasPage implements OnInit {
         }
       }
     });
+  }
+
+  showProgressBar() {
+    this.showLoader = true;
+  }
+
+  hideProgressBar() {
+    this.showLoader = false;
   }
 
   uploadImage(input) {

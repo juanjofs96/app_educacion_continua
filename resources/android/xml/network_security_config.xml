@@ -4,5 +4,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain>157.230.227.213</domain>
         <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">www.cec.espol.edu.ec</domain>
     </domain-config>
 </network-security-config>

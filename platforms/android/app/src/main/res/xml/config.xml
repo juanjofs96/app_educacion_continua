@@ -48,6 +48,7 @@
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
+    <access launch-external="yes" origin="whatsapp://*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">

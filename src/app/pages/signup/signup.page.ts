@@ -76,7 +76,7 @@ export class SignupPage implements OnInit {
 
   validarCampos() {
     if (this.name != "" && this.apellidos != "" && this.id != ""
-      && this.email != "" && this.email2 != "" && this.genero != "" && this.pass != "" && this.pass2 != ""
+      && this.email != "" && this.genero != "" && this.pass != "" && this.pass2 != ""
       && this.celular != "" && this.direccion != "") {
       if (this.pass != this.pass2) {
         this.alertError("Verifique su clave", "Las contraseñas no coinciden");

@@ -423,6 +423,7 @@ let AppComponent = class AppComponent {
         if (this.listMenu[index].disable) {
             this.alertLogin();
             this.permitido = false;
+            this.menu.close();
         }
         else {
             this.permitido = true;
