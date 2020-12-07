@@ -133,7 +133,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-app>\n  <ion-split-pane contentId=\"main\">\n    <!--  the side menu  -->\n    <ion-menu contentId=\"main\" menuId=\"menu_lateral\">\n      <ion-header>\n        <ion-toolbar class=\"toolhead\">\n          <ion-buttons slot=\"start\">\n            <ion-menu-button></ion-menu-button>\n          </ion-buttons>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-item *ngFor=\"let list of listMenu;let i = index\" [attr.data-index]=\"i\">\n            <ion-button fill=\"clear\" (click)=\"verificar(i)\">{{list.item}}</ion-button>\n          </ion-item>\n        </ion-list>\n      </ion-content>\n      <ion-footer *ngIf=\"estadoUser\">\n        <ion-toolbar>\n            <ion-item>\n            <ion-button hide=\"estadoUser\" fill=\"clear\" size=\"medium\" (click)=\"salir()\">\n              <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\n              Salir\n            </ion-button>\n            </ion-item>\n        </ion-toolbar>\n      </ion-footer>\n    </ion-menu>\n\n    <!-- the main content -->\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\n  </ion-split-pane>\n\n</ion-app>";
+      __webpack_exports__["default"] = "<ion-app>\r\n  <ion-split-pane contentId=\"main\">\r\n    <!--  the side menu  -->\r\n    <ion-menu contentId=\"main\" menuId=\"menu_lateral\">\r\n      <ion-header>\r\n        <ion-toolbar class=\"toolhead\">\r\n          <ion-buttons slot=\"start\">\r\n            <ion-menu-button></ion-menu-button>\r\n          </ion-buttons>\r\n          <ion-title>Menu</ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-list>\r\n          <ion-item *ngFor=\"let list of listMenu;let i = index\" [attr.data-index]=\"i\">\r\n            <ion-button fill=\"clear\" (click)=\"verificar(i)\">{{list.item}}</ion-button>\r\n          </ion-item>\r\n        </ion-list>\r\n      </ion-content>\r\n      <ion-footer *ngIf=\"estadoUser\">\r\n        <ion-toolbar>\r\n            <ion-item>\r\n            <ion-button hide=\"estadoUser\" fill=\"clear\" size=\"medium\" (click)=\"salir()\">\r\n              <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\r\n              Salir\r\n            </ion-button>\r\n            </ion-item>\r\n        </ion-toolbar>\r\n      </ion-footer>\r\n    </ion-menu>\r\n\r\n    <!-- the main content -->\r\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n  </ion-split-pane>\r\n\r\n</ion-app>";
       /***/
     },
 
@@ -153,7 +153,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button (click)=\"verificar(i)\" *ngFor=\"let list of listTabs;let i = index\" [attr.data-index]=\"i\" tab=\"{{list.tab}}\">\n      <ion-icon name=\"{{list.icon}}\"></ion-icon>\n      <ion-label>{{list.item}}</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n";
+      __webpack_exports__["default"] = "<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n    <ion-tab-button (click)=\"verificar(i)\" *ngFor=\"let list of listTabs;let i = index\" [attr.data-index]=\"i\" tab=\"{{list.tab}}\">\r\n      <ion-icon name=\"{{list.icon}}\"></ion-icon>\r\n      <ion-label>{{list.item}}</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n";
       /***/
     },
 
@@ -467,6 +467,7 @@
             if (this.listMenu[index].disable) {
               this.alertLogin();
               this.permitido = false;
+              this.menu.close();
             } else {
               this.permitido = true;
             }
@@ -715,7 +716,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "ion-tab-bar {\n  --background: var(--ion-tab-bar-background, var(--ion-background-color, #ECECEC));\n  --border: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlGQUFBO0VBQ0EsY0FBQTtBQUNKIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10YWItYmFyIHtcbiAgICAtLWJhY2tncm91bmQ6IHZhcigtLWlvbi10YWItYmFyLWJhY2tncm91bmQsIHZhcigtLWlvbi1iYWNrZ3JvdW5kLWNvbG9yLCAjRUNFQ0VDKSk7XG4gICAgLS1ib3JkZXI6IG5vbmU7XG59Il19 */";
+      __webpack_exports__["default"] = "ion-tab-bar {\n  --background: var(--ion-tab-bar-background, var(--ion-background-color, #ECECEC));\n  --border: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlGQUFBO0VBQ0EsY0FBQTtBQUNKIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10YWItYmFyIHtcclxuICAgIC0tYmFja2dyb3VuZDogdmFyKC0taW9uLXRhYi1iYXItYmFja2dyb3VuZCwgdmFyKC0taW9uLWJhY2tncm91bmQtY29sb3IsICNFQ0VDRUMpKTtcclxuICAgIC0tYm9yZGVyOiBub25lO1xyXG59Il19 */";
       /***/
     },
 
@@ -967,7 +968,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       module.exports = __webpack_require__(
-      /*! C:\Users\david\Desktop\app_educacion_continua-main\src\main.ts */
+      /*! C:\Users\klebe\OneDrive\Escritorio\App Ing. Software\app_educacion_continua\src\main.ts */
       "./src/main.ts");
       /***/
     }
