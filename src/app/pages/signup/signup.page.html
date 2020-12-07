@@ -8,17 +8,20 @@
   <form>
     <ion-list>
       <ion-item>
+        <ion-label position="stacked">N° Cédula</ion-label>
+        <ion-input [(ngModel)]="id" name="id" autocomplete="off" type="text"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label position="stacked">Nombres</ion-label>
         <ion-input [(ngModel)]="name" name="nombre" autocomplete="off" type="text"><ion-icon name="person-outline"></ion-icon></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label position="stacked">Apellidos</ion-label>
         <ion-input [(ngModel)]="apellidos" autocomplete="off" name="apellidos" type="text"><ion-icon name="people-outline"></ion-icon></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Identificación</ion-label>
-        <ion-input [(ngModel)]="id" name="id" autocomplete="off" type="text"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
-      </ion-item>
+      
       <ion-item>
         <ion-label position="stacked">Correo electrónico</ion-label>
         <ion-input [(ngModel)]="email" autocomplete="off" name="email" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
