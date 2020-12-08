@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-content>\r\n  <div class=\"vertical-center\">\r\n    <img src=\"assets/images/LogoCEC.png\" class=\"smallLogo\" />\r\n  </div>\r\n  <ion-text color=\"primary\" class=\"color-h3\">\r\n    <h3>Iniciar Sesión</h3>\r\n  </ion-text>\r\n    <ion-list>\r\n      <ion-item>\r\n        <ion-label position=\"stacked\">Correo electrónico</ion-label>\r\n        <ion-input [(ngModel)]=\"email\" name=\"correo\" autocomplete=\"on\" type=\"email\"><ion-icon name=\"mail-outline\"></ion-icon></ion-input>\r\n      </ion-item>\r\n\r\n      <ion-item>\r\n        <ion-label position=\"stacked\">Contraseña</ion-label>\r\n        <ion-input [(ngModel)]=\"pass\" autocomplete=\"off\" name=\"clave\" type=\"password\"><ion-icon name=\"keypad-outline\"></ion-icon></ion-input>\r\n      </ion-item>\r\n\r\n      <ion-item lines=\"none\">\r\n        <a routerLink=\"/educ/home/\" slot=\"end\">No iniciar sesión</a>\r\n      </ion-item>\r\n    </ion-list>\r\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" (click)=\"login()\">Iniciar Sesión</ion-button>\r\n\r\n  <!--header class=\"ion-padding-start ion-padding-top\"></!--header-->\r\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"loginFacebook()\" class=\"ion-padding-horizontal\">\r\n    <ion-icon slot=\"start\" name=\"logo-facebook\"></ion-icon>\r\n    Iniciar Sesión con Facebook\r\n  </ion-button>\r\n\r\n  <ion-button expand=\"block\" color=\"danger\" (click)=\"loginGoogle()\" class=\"ion-padding-horizontal\">\r\n    <ion-icon slot=\"start\" name=\"logo-google\"></ion-icon>\r\n    Iniciar Sesión con Google\r\n  </ion-button>\r\n\r\n  <section>\r\n    <header class=\"ion-padding-start ion-padding-top\">¿Eres nuevo?</header>\r\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" routerLink=\"/signup\">\r\n      Crear nueva cuenta</ion-button>\r\n  </section>\r\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-content>\n  <div class=\"vertical-center\">\n    <img src=\"assets/images/LogoCEC.png\" class=\"smallLogo\" />\n  </div>\n  <ion-text color=\"primary\" class=\"color-h3\">\n    <h3>Iniciar Sesión</h3>\n  </ion-text>\n    <ion-list>\n      <ion-item>\n        <ion-label position=\"stacked\">Correo electrónico</ion-label>\n        <ion-input [(ngModel)]=\"email\" name=\"correo\" autocomplete=\"on\" type=\"email\"><ion-icon name=\"mail-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"stacked\">Contraseña</ion-label>\n        <ion-input [(ngModel)]=\"pass\" autocomplete=\"off\" name=\"clave\" type=\"password\"><ion-icon name=\"keypad-outline\"></ion-icon></ion-input>\n      </ion-item>\n\n      <ion-item lines=\"none\">\n        <a routerLink=\"/educ/home/\" slot=\"end\">No iniciar sesión</a>\n      </ion-item>\n    </ion-list>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" (click)=\"login()\">Iniciar Sesión</ion-button>\n\n  <!--header class=\"ion-padding-start ion-padding-top\"></!--header-->\n  <ion-button expand=\"block\" color=\"tertiary\" (click)=\"loginFacebook()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-facebook\"></ion-icon>\n    Iniciar Sesión con Facebook\n  </ion-button>\n\n  <ion-button expand=\"block\" color=\"danger\" (click)=\"loginGoogle()\" class=\"ion-padding-horizontal\">\n    <ion-icon slot=\"start\" name=\"logo-google\"></ion-icon>\n    Iniciar Sesión con Google\n  </ion-button>\n\n  <section>\n    <header class=\"ion-padding-start ion-padding-top\">¿Eres nuevo?</header>\n    <ion-button expand=\"block\" color=\"primary\" class=\"ion-padding-horizontal\" routerLink=\"/signup\">\n      Crear nueva cuenta</ion-button>\n  </section>\n</ion-content>";
       /***/
     },
 
@@ -132,19 +132,25 @@
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @ionic/storage */
+      "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @ionic/angular */
       "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
       /* harmony import */
 
 
-      var _login_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _login_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ./login-routing.module */
       "./src/app/pages/login/login-routing.module.ts");
       /* harmony import */
 
 
-      var _login_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _login_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ./login.page */
       "./src/app/pages/login/login.page.ts");
 
@@ -153,8 +159,8 @@
       };
 
       LoginPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _login_routing_module__WEBPACK_IMPORTED_MODULE_5__["LoginPageRoutingModule"]],
-        declarations: [_login_page__WEBPACK_IMPORTED_MODULE_6__["LoginPage"]]
+        imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"], _login_routing_module__WEBPACK_IMPORTED_MODULE_6__["LoginPageRoutingModule"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["IonicStorageModule"].forRoot()],
+        declarations: [_login_page__WEBPACK_IMPORTED_MODULE_7__["LoginPage"]]
       })], LoginPageModule);
       /***/
     },
@@ -175,7 +181,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "ion-content {\n  --ion-background-color: #ECECEC;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbG9naW4vbG9naW4ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksK0JBQUE7QUFDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50IHtcclxuICAgIC0taW9uLWJhY2tncm91bmQtY29sb3I6ICNFQ0VDRUM7XHJcbiAgfVxyXG5cclxuIl19 */";
+      __webpack_exports__["default"] = "ion-content {\n  --ion-background-color: #ECECEC;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvbG9naW4vbG9naW4ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksK0JBQUE7QUFDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50IHtcbiAgICAtLWlvbi1iYWNrZ3JvdW5kLWNvbG9yOiAjRUNFQ0VDO1xuICB9XG5cbiJdfQ== */";
       /***/
     },
 
@@ -311,6 +317,12 @@
                         if (!user.error) {
                           self.App.id_User = user.id;
                           self.habilitarOpciones();
+                          self.App.storage.set("user", data.correo);
+                          self.App.storage.set("pass", data.clave);
+                          self.App.storage.set("id", user.id);
+                          self.App.storage.get("id").then(function (value) {
+                            console.log(value);
+                          });
                         } else {
                           self.alertError(user.mensaje, "Credenciales incorrectas");
                         }

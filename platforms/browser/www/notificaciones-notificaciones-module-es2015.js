@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar class=\"toolhead\">\n    <ion-buttons slot=\"start\">\n        <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Notificaciones</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar class=\"toolhead\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Notificaciones</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-list lines=\"full\">\n    <button style=\"width: 100%;\">\n      <ion-item (click)=\"alertDetalle(i)\" *ngFor=\"let list of listNotificaciones;let i = index\" [attr.data-index]=\"i\">\n        <ion-avatar slot=\"start\">\n          <ion-img [src]=\"list.imagen\"></ion-img>\n        </ion-avatar>\n        <ion-label>\n          <h3>{{list.titulo}}</h3>\n          <p>{{list.descripcion}}</p>\n          <p>{{list.fecha}}</p>\n        </ion-label>\n      </ion-item>\n    </button>\n  </ion-list>\n</ion-content>");
 
 /***/ }),
 
@@ -117,14 +117,103 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotificacionesPage", function() { return NotificacionesPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app.component */ "./src/app/app.component.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+
+
+
+
+
 
 
 let NotificacionesPage = class NotificacionesPage {
-    constructor() { }
-    ngOnInit() {
+    constructor(App, alertController, router) {
+        this.App = App;
+        this.alertController = alertController;
+        this.router = router;
+        this.listNotificaciones = [];
+    }
+    ionViewDidEnter() {
+        this.listNotificaciones = [];
+        if (this.App.id_User != null) {
+            this.getNotificaciones();
+        }
+    }
+    getNotificaciones() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var self = this;
+            var data = {
+                "id": this.App.id_User
+            };
+            yield jquery__WEBPACK_IMPORTED_MODULE_5__["post"](_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url + "/api/notificaciones_participante/", data).done(function (notificacion) {
+                if (!notificacion.error) {
+                    self.listNotificaciones = notificacion.notificaciones;
+                    for (let i = 0; i < self.listNotificaciones.length; i++) {
+                        self.listNotificaciones[i].imagen = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url + self.listNotificaciones[i].imagen;
+                    }
+                }
+                else {
+                    self.alertNotificacion('Sin Notificaciones', notificacion.mensaje);
+                }
+            });
+        });
+    }
+    alertNotificacion(msg, mensaje) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: msg,
+                message: mensaje,
+                buttons: ['OK']
+            });
+            yield alert.present();
+        });
+    }
+    remover(id_notificacion) {
+        var self = this;
+        let data = {
+            "id_notificacion_participante": id_notificacion,
+            "estado": false
+        };
+        jquery__WEBPACK_IMPORTED_MODULE_5__["ajax"]({
+            url: _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url + "/api/actualizar_notificacion/",
+            data: data,
+            type: 'PATCH',
+            success: function (notificacion) {
+                if (!notificacion.error) {
+                    self.alertNotificacion("Notificación eliminada", notificacion.mensaje);
+                }
+                else {
+                    self.alertNotificacion("Error", notificacion.mensaje);
+                }
+            }
+        });
+    }
+    alertDetalle(index) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                buttons: [{ text: 'Remover', handler: () => { this.remover(this.listNotificaciones[index].id_notificacion_participante); } }, { text: 'Cerrar' }],
+                message: `
+    <img src="${this.listNotificaciones[index].imagen}" style="width:80%; height:80%; border-radius: 2px">
+    <ion-item>
+      <ion-text> <b>${this.listNotificaciones[index].titulo} </b> </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-text> ${this.listNotificaciones[index].descripcion} </ion-text>
+    </ion-item>`,
+            });
+            yield alert.present();
+        });
     }
 };
-NotificacionesPage.ctorParameters = () => [];
+NotificacionesPage.ctorParameters = () => [
+    { type: _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+];
 NotificacionesPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-notificaciones',

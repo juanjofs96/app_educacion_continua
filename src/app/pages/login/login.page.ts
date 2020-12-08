@@ -1,5 +1,5 @@
-import { Component,OnInit } from '@angular/core';
-import { NavigationExtras, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
@@ -8,7 +8,7 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { AppComponent } from "../../app.component";
 import * as $ from "jquery";
 import { AlertController } from '@ionic/angular';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +21,7 @@ export class LoginPage implements OnInit {
   public id_user: string;
   private email: string = "";
   private pass: string = "";
+  private showpassword: boolean;
   constructor(
     private router: Router,
     private platform: Platform,
@@ -30,55 +31,62 @@ export class LoginPage implements OnInit {
     private App: AppComponent,
     private alertController: AlertController
   ) {
-  
-  }
-
-ngOnInit() {
 
   }
+
+  ngOnInit() {
+
+  }
+
 
   async login() {
-    var data={
-      "correo":this.email,
-      "clave":this.pass
+    var data = {
+      "correo": this.email,
+      "clave": this.pass
     }
     var self = this;
-    var url=environment.url+"/api/login_participante/"
-    await $.post(url,data).done(function (user) {
-          if(!user.error){
-            self.App.id_User = user.id;
-            self.habilitarOpciones();
-          }          
-         else{
-          self.alertError(user.mensaje,"Credenciales incorrectas");
-         }
+    var url = environment.url + "/api/login_participante/"
+    await $.post(url, data).done(function (user) {
+      if (!user.error) {
+        self.App.id_User = user.id;
+        self.habilitarOpciones();
+        self.App.storage.set("user", data.correo);
+        self.App.storage.set("pass", data.clave);
+        self.App.storage.set("id", user.id);
+        self.App.storage.get("id").then((value) => {
+          console.log(value);
+        })
+      }
+      else {
+        self.alertError(user.mensaje, "Credenciales incorrectas");
+      }
     });
   }
 
-  async verificarCuenta(res:any) {
+  async verificarCuenta(res: any) {
     var self = this;
-    
-    var data ={
-      "correo":res['email'],
-      "nombres":res['given_name'],
-      "apellidos":res['family_name']
+
+    var data = {
+      "correo": res['email'],
+      "nombres": res['given_name'],
+      "apellidos": res['family_name']
     }
-    await $.post(environment.url+"/api/existe_participante/",data).done( function (user) {
-          if(!user.error){
-            self.App.id_User = user.id;
-            self.habilitarOpciones();
+    await $.post(environment.url + "/api/existe_participante/", data).done(function (user) {
+      if (!user.error) {
+        self.App.id_User = user.id;
+        self.habilitarOpciones();
+      }
+      else {
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            user: JSON.stringify(data)
           }
-          else{
-            let navigationExtras: NavigationExtras = {
-              queryParams: {
-                user: JSON.stringify(data)
-              }
-            };
-            self.alertError("Complete los datos faltantes para completar su registro","Inicio exitoso");
-            self.router.navigate(["/signup/"],navigationExtras);
-          }
-  })
-}
+        };
+        self.alertError("Complete los datos faltantes para completar su registro", "Inicio exitoso");
+        self.router.navigate(["/signup/"], navigationExtras);
+      }
+    })
+  }
 
   async loginGoogle() {
     let params;
@@ -108,6 +116,10 @@ ngOnInit() {
       this.loginFacebookWeb();
     }
   }
+
+  togglePasswordText() {
+    this.showpassword = !this.showpassword;
+}
 
   async loginGoogleWeb() {
     const res = await this.fireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
@@ -150,7 +162,7 @@ ngOnInit() {
     this.router.navigate(["/educ/home/"]);
   }
 
-  async alertError(msg:string,msg2:string) {
+  async alertError(msg: string, msg2: string) {
     const alert = await this.alertController.create({
       header: msg2,
       message: msg,

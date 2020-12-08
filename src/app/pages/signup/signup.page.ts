@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery";
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -10,7 +10,7 @@ import {environment} from '../../../environments/environment';
 })
 export class SignupPage implements OnInit {
   private name: string = "";
-  private pass: string = "";
+  private pass1: string = "";
   private pass2: string = "";
   private apellidos: string = "";
   private email: string = "";
@@ -22,6 +22,8 @@ export class SignupPage implements OnInit {
   private data: any;
   private data_aux: any;
   private verificado: boolean;
+  private showpassword: boolean;
+  private showpassword2: boolean;
   constructor(private alertController: AlertController, private router: ActivatedRoute, private route: Router) {
     this.router.queryParams.subscribe(params => {
       this.data_aux = JSON.parse(params.user);
@@ -40,7 +42,7 @@ export class SignupPage implements OnInit {
       nombres: this.name,
       apellidos: this.apellidos,
       identificacion: this.id,
-      password: this.pass,
+      password: this.pass1,
       correo: this.email,
       correo_alternativo: this.email2,
       telefono: this.celular,
@@ -50,7 +52,7 @@ export class SignupPage implements OnInit {
     var self = this;
     var validado = this.validarCampos();
     if (validado && this.verificado) {
-      $.post(environment.url+"/api/participante/", this.data)
+      $.post(environment.url + "/api/participante/", this.data)
         .done(function (data) {
           self.alertError("Registro exitoso", "Su cuenta se ha creado exitosamente");
           self.route.navigate(["/educ/home/"]);
@@ -59,11 +61,11 @@ export class SignupPage implements OnInit {
           let x = error.responseJSON;
           let isError = false;
           try {
-            x["correo"][0] != null || x["correo_alternativo"][0] != null ? self.alertError("Error al registrarse", "Introduzca una dirección de correo electrónico válida.") : isError = true;
+            x["password"][0] != null ? self.alertError("Error al registrarse", x["password"][0]) : isError = true;
+            x["correo"][0] != null ? self.alertError("Error al registrarse", x["correo"][0]) : isError = true;
             x["identificacion"][0] != null ? self.alertError("Error al registrarse", x["identificacion"][0]) : isError = true;
-            !isError ? self.alertError("Error al registrarse", "El registro no fue exitoso") : null;
           } catch (ex) {
-            if (isError) {
+            if (!isError) {
               self.alertError("Error al registrarse", "El registro no fue exitoso");
             }
           }
@@ -74,11 +76,19 @@ export class SignupPage implements OnInit {
 
   }
 
+  togglePasswordText() {
+    this.showpassword = !this.showpassword;
+  }
+
+  togglePasswordText2() {
+    this.showpassword2 = !this.showpassword2;
+  }
+
   validarCampos() {
     if (this.name != "" && this.apellidos != "" && this.id != ""
-      && this.email != "" && this.genero != "" && this.pass != "" && this.pass2 != ""
+      && this.email != "" && this.genero != "" && this.pass1 != "" && this.pass2 != ""
       && this.celular != "" && this.direccion != "") {
-      if (this.pass != this.pass2) {
+      if (this.pass1 != this.pass2) {
         this.alertError("Verifique su clave", "Las contraseñas no coinciden");
         this.verificado = false;
       }

@@ -5,22 +5,33 @@
   <ion-text color="primary" class="color-h3">
     <h3>Iniciar Sesión</h3>
   </ion-text>
-    <ion-list>
-      <ion-item>
-        <ion-label position="stacked">Correo electrónico</ion-label>
-        <ion-input [(ngModel)]="email" name="correo" autocomplete="on" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
-      </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Correo electrónico</ion-label>
+      <ion-input [(ngModel)]="email" name="correo" autocomplete="on" type="email">
+        <ion-icon name="mail-outline"></ion-icon>
+      </ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input [(ngModel)]="pass" autocomplete="off" name="clave" type="password"><ion-icon name="keypad-outline"></ion-icon></ion-input>
-      </ion-item>
 
-      <ion-item lines="none">
-        <a routerLink="/educ/home/" slot="end">No iniciar sesión</a>
-      </ion-item>
-    </ion-list>
-    <ion-button expand="block" color="primary" class="ion-padding-horizontal" (click)="login()">Iniciar Sesión</ion-button>
+    <ion-item *ngIf="showpassword">
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-icon slot="end" color="primary" name="eye" (click)="togglePasswordText()"></ion-icon>
+      <ion-input [(ngModel)]="pass" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!showpassword">
+      <ion-label position="stacked" >Contraseña</ion-label>
+      <ion-input [(ngModel)]="pass" type="password"  required></ion-input>
+      <ion-icon slot="end" color="medium" name="eye-off" (click)="togglePasswordText()"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <a routerLink="/educ/home/" slot="end">No iniciar sesión</a>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" color="primary" class="ion-padding-horizontal" (click)="login()">Iniciar Sesión
+  </ion-button>
 
   <!--header class="ion-padding-start ion-padding-top"></!--header-->
   <ion-button expand="block" color="tertiary" (click)="loginFacebook()" class="ion-padding-horizontal">

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar class=\"toolhead\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Notificaciones</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <ion-list lines=\"full\">\r\n    <button style=\"width: 100%;\">\r\n      <ion-item (click)=\"alertDetalle(i)\" *ngFor=\"let list of listNotificaciones;let i = index\" [attr.data-index]=\"i\">\r\n        <ion-avatar slot=\"start\">\r\n          <ion-img [src]=\"list.imagen\"></ion-img>\r\n        </ion-avatar>\r\n        <ion-label>\r\n          <h3>{{list.titulo}}</h3>\r\n          <p>{{list.descripcion}}</p>\r\n          <p>{{list.fecha}}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n    </button>\r\n  </ion-list>\r\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar class=\"toolhead\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Notificaciones</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-list lines=\"full\">\n    <button style=\"width: 100%;\">\n      <ion-item (click)=\"alertDetalle(i)\" *ngFor=\"let list of listNotificaciones;let i = index\" [attr.data-index]=\"i\">\n        <ion-avatar slot=\"start\">\n          <ion-img [src]=\"list.imagen\"></ion-img>\n        </ion-avatar>\n        <ion-label>\n          <h3>{{list.titulo}}</h3>\n          <p>{{list.descripcion}}</p>\n          <p>{{list.fecha}}</p>\n        </ion-label>\n      </ion-item>\n    </button>\n  </ion-list>\n</ion-content>");
 
 /***/ }),
 

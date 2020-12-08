@@ -37,6 +37,26 @@ module.exports = [
         "clobbers": [
             "facebookConnectPlugin"
         ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "pluginId": "cordova-sqlite-storage",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/node_modules/cordova-sqlite-storage-dependencies/sql-asm-memory-growth.js",
+        "id": "cordova-sqlite-storage.sql",
+        "pluginId": "cordova-sqlite-storage",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-sqlite-storage/src/browser/SQLiteProxy.js",
+        "id": "cordova-sqlite-storage.SQLiteProxy",
+        "pluginId": "cordova-sqlite-storage",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -44,7 +64,8 @@ module.exports.metadata =
 {
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-googleplus": "8.5.",
-    "cordova-plugin-facebook4": "6.4.0"
+    "cordova-plugin-facebook4": "6.4.0",
+    "cordova-sqlite-storage": "5.1.0"
 }
 // BOTTOM OF METADATA
 });

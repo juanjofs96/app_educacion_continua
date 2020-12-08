@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar class=\"toolhead\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>Mis Cursos</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-item [routerLink]=\"['/educ/cursos',list.codigo_evento]\" *ngFor=\"let list of listCursos\" >\r\n        <ion-avatar slot=\"start\">\r\n          <ion-img [src]=\"list.imagen\"></ion-img>\r\n        </ion-avatar>\r\n        <ion-label>\r\n          <h3>{{list.nombre_curso}}</h3>\r\n          <p>{{list.fecha_inicio}}</p>\r\n          <ion-text color=\"red\">\r\n            <p>{{list.estado}}</p>\r\n          </ion-text>\r\n        </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar class=\"toolhead\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>Mis Cursos</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item [routerLink]=\"['/educ/cursos',list.codigo_evento]\" *ngFor=\"let list of listCursos\" >\n        <ion-avatar slot=\"start\">\n          <ion-img [src]=\"list.imagen\"></ion-img>\n        </ion-avatar>\n        <ion-label>\n          <h3>{{list.nombre_curso}}</h3>\n          <p>{{list.fecha_inicio}}</p>\n          <ion-text color=\"red\">\n            <p>{{list.estado}}</p>\n          </ion-text>\n        </ion-label>\n    </ion-item>\n  </ion-list>\n</ion-content>";
       /***/
     },
 

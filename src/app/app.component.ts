@@ -4,6 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { MenuController, AlertController, Platform } from '@ionic/angular';
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -19,35 +20,39 @@ export class AppComponent {
   { item: "Notificaciones", disable: true, tab: "notificaciones", icon: "notifications" },
   { item: "Encuestas", disable: true, tab: "encuestas", icon: "bar-chart" }];
   public estadoUser: boolean;
-  public id_User:string;
-  private permitido : boolean
+  public id_User: string;
+  private permitido: boolean;
+  public storage:Storage;
   constructor(
     private alertController: AlertController,
     private router: Router,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private menu: MenuController
+    private menu: MenuController,
+    private s:Storage
   ) {
-    this.permitido=true;
+    this.storage=s;
+    this.permitido = true;
     this.initializeApp();
   }
 
   initializeApp() {
     this.estadoUser = false;
+    this.verificarLogin();
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
     });
   }
 
   verificar(index: number) {
-    if (this.listMenu[index].disable){
+    if (this.listMenu[index].disable) {
       this.alertLogin();
-      this.permitido=false;
+      this.permitido = false;
       this.menu.close();
     }
-    else{
-      this.permitido=true;
+    else {
+      this.permitido = true;
     }
 
     if (index == 3 && this.permitido) {
@@ -59,6 +64,17 @@ export class AppComponent {
       this.router.navigate(["educ/sugerencias/"]);
       this.menu.close();
     }
+  }
+
+    verificarLogin() {
+    this.storage.get("id").then((value) => {
+      if (value != null) {
+        this.id_User = value;
+        console.log("HABILITADO");
+        this.habilitarOpciones();
+
+      }
+    })
   }
 
   async alertLogin() {
@@ -80,9 +96,10 @@ export class AppComponent {
   }
 
   salir() {
+    this.storage.set("id",null);
     this.router.navigate(["/login"]);
     this.estadoUser = false;
-    this.id_User=null;
+    this.id_User = null;
     this.menu.close();
     for (let i = 0; i < this.listMenu.length; i++) {
       i == 3 ? this.listMenu[i].disable = false : this.listMenu[i].disable = true;
@@ -92,6 +109,19 @@ export class AppComponent {
       i == 0 ? this.listTabs[i].disable = false : this.listTabs[i].disable = true;
     }
 
+  }
+
+  
+  habilitarOpciones() {
+    this.estadoUser = true;
+    for (let i = 0; i < this.listMenu.length; i++) {
+      this.listMenu[i].disable = false;
+    }
+
+    for (let i = 0; i < this.listTabs.length; i++) {
+      this.listTabs[i].disable = false;
+    }
+    this.router.navigate(["/educ/home/"]);
   }
 
 }

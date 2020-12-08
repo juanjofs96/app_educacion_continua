@@ -270,7 +270,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-split-pane contentId=\"main\">\r\n    <!--  the side menu  -->\r\n    <ion-menu contentId=\"main\" menuId=\"menu_lateral\">\r\n      <ion-header>\r\n        <ion-toolbar class=\"toolhead\">\r\n          <ion-buttons slot=\"start\">\r\n            <ion-menu-button></ion-menu-button>\r\n          </ion-buttons>\r\n          <ion-title>Menu</ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-list>\r\n          <ion-item *ngFor=\"let list of listMenu;let i = index\" [attr.data-index]=\"i\">\r\n            <ion-button fill=\"clear\" (click)=\"verificar(i)\">{{list.item}}</ion-button>\r\n          </ion-item>\r\n        </ion-list>\r\n      </ion-content>\r\n      <ion-footer *ngIf=\"estadoUser\">\r\n        <ion-toolbar>\r\n            <ion-item>\r\n            <ion-button hide=\"estadoUser\" fill=\"clear\" size=\"medium\" (click)=\"salir()\">\r\n              <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\r\n              Salir\r\n            </ion-button>\r\n            </ion-item>\r\n        </ion-toolbar>\r\n      </ion-footer>\r\n    </ion-menu>\r\n\r\n    <!-- the main content -->\r\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n  </ion-split-pane>\r\n\r\n</ion-app>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-split-pane contentId=\"main\">\n    <!--  the side menu  -->\n    <ion-menu contentId=\"main\" menuId=\"menu_lateral\">\n      <ion-header>\n        <ion-toolbar class=\"toolhead\">\n          <ion-buttons slot=\"start\">\n            <ion-menu-button></ion-menu-button>\n          </ion-buttons>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-item *ngFor=\"let list of listMenu;let i = index\" [attr.data-index]=\"i\">\n            <ion-button fill=\"clear\" (click)=\"verificar(i)\">{{list.item}}</ion-button>\n          </ion-item>\n        </ion-list>\n      </ion-content>\n      <ion-footer *ngIf=\"estadoUser\">\n        <ion-toolbar>\n            <ion-item>\n            <ion-button hide=\"estadoUser\" fill=\"clear\" size=\"medium\" (click)=\"salir()\">\n              <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\n              Salir\n            </ion-button>\n            </ion-item>\n        </ion-toolbar>\n      </ion-footer>\n    </ion-menu>\n\n    <!-- the main content -->\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\n  </ion-split-pane>\n\n</ion-app>");
 
 /***/ }),
 
@@ -283,7 +283,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n    <ion-tab-button (click)=\"verificar(i)\" *ngFor=\"let list of listTabs;let i = index\" [attr.data-index]=\"i\" tab=\"{{list.tab}}\">\r\n      <ion-icon name=\"{{list.icon}}\"></ion-icon>\r\n      <ion-label>{{list.item}}</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button (click)=\"verificar(i)\" *ngFor=\"let list of listTabs;let i = index\" [attr.data-index]=\"i\" tab=\"{{list.tab}}\">\n      <ion-icon name=\"{{list.icon}}\"></ion-icon>\n      <ion-label>{{list.item}}</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n");
 
 /***/ }),
 
@@ -300,6 +300,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+
 
 
 
@@ -351,7 +353,8 @@ let AppRoutingModule = class AppRoutingModule {
 AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_2__["PreloadAllModules"] })
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_2__["PreloadAllModules"] }),
+            _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["IonicStorageModule"].forRoot()
         ],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
     })
@@ -390,6 +393,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+
 
 
 
@@ -398,23 +403,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(alertController, router, platform, splashScreen, statusBar, menu) {
+    constructor(alertController, router, platform, splashScreen, statusBar, menu, s) {
         this.alertController = alertController;
         this.router = router;
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.menu = menu;
+        this.s = s;
         this.listMenu = [{ item: "Curso Aprobados", disable: true }, { item: "Descargar Diplomas", disable: true }, { item: "Sugerencias y Reclamos", disable: true },
             { item: "Contáctanos", disable: false }, { item: "Perfil", disable: true }];
         this.listTabs = [{ item: "Home", disable: false, tab: "home", icon: "home" }, { item: "Mis Cursos", disable: true, tab: "cursos", icon: "school" },
             { item: "Notificaciones", disable: true, tab: "notificaciones", icon: "notifications" },
             { item: "Encuestas", disable: true, tab: "encuestas", icon: "bar-chart" }];
+        this.storage = s;
         this.permitido = true;
         this.initializeApp();
     }
     initializeApp() {
         this.estadoUser = false;
+        this.verificarLogin();
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
         });
@@ -437,6 +445,16 @@ let AppComponent = class AppComponent {
             this.menu.close();
         }
     }
+    verificarLogin() {
+        this.storage.get("id").then((value) => {
+            console.log("LENGTH: ", value);
+            if (value != null) {
+                this.id_User = value;
+                console.log("HABILITADO");
+                this.habilitarOpciones();
+            }
+        });
+    }
     alertLogin() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
@@ -457,6 +475,7 @@ let AppComponent = class AppComponent {
         });
     }
     salir() {
+        this.storage.set("id", null);
         this.router.navigate(["/login"]);
         this.estadoUser = false;
         this.id_User = null;
@@ -468,6 +487,16 @@ let AppComponent = class AppComponent {
             i == 0 ? this.listTabs[i].disable = false : this.listTabs[i].disable = true;
         }
     }
+    habilitarOpciones() {
+        this.estadoUser = true;
+        for (let i = 0; i < this.listMenu.length; i++) {
+            this.listMenu[i].disable = false;
+        }
+        for (let i = 0; i < this.listTabs.length; i++) {
+            this.listTabs[i].disable = false;
+        }
+        this.router.navigate(["/educ/home/"]);
+    }
 };
 AppComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] },
@@ -475,7 +504,8 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"] },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"] }
 ];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -564,7 +594,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("ion-tab-bar {\n  --background: var(--ion-tab-bar-background, var(--ion-background-color, #ECECEC));\n  --border: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlGQUFBO0VBQ0EsY0FBQTtBQUNKIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10YWItYmFyIHtcclxuICAgIC0tYmFja2dyb3VuZDogdmFyKC0taW9uLXRhYi1iYXItYmFja2dyb3VuZCwgdmFyKC0taW9uLWJhY2tncm91bmQtY29sb3IsICNFQ0VDRUMpKTtcclxuICAgIC0tYm9yZGVyOiBub25lO1xyXG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = ("ion-tab-bar {\n  --background: var(--ion-tab-bar-background, var(--ion-background-color, #ECECEC));\n  --border: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlGQUFBO0VBQ0EsY0FBQTtBQUNKIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10YWItYmFyIHtcbiAgICAtLWJhY2tncm91bmQ6IHZhcigtLWlvbi10YWItYmFyLWJhY2tncm91bmQsIHZhcigtLWlvbi1iYWNrZ3JvdW5kLWNvbG9yLCAjRUNFQ0VDKSk7XG4gICAgLS1ib3JkZXI6IG5vbmU7XG59Il19 */");
 
 /***/ }),
 
@@ -707,7 +737,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\klebe\OneDrive\Escritorio\App Ing. Software\app_educacion_continua\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\david\Desktop\app_educacion_continua-main\src\main.ts */"./src/main.ts");
 
 
 /***/ })
