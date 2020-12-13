@@ -411,9 +411,15 @@
       var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @ionic/storage */
       "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+      /* harmony import */
+
+
+      var _app_services_messaging_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ../app/services/messaging.service */
+      "./src/app/services/messaging.service.ts");
 
       var AppComponent = /*#__PURE__*/function () {
-        function AppComponent(alertController, router, platform, splashScreen, statusBar, menu, s) {
+        function AppComponent(alertController, router, platform, splashScreen, statusBar, menu, s, messagingService) {
           _classCallCheck(this, AppComponent);
 
           this.alertController = alertController;
@@ -423,6 +429,8 @@
           this.statusBar = statusBar;
           this.menu = menu;
           this.s = s;
+          this.messagingService = messagingService;
+          this.pushes = [];
           this.listMenu = [{
             item: "Curso Aprobados",
             disable: true
@@ -473,7 +481,104 @@
             this.estadoUser = false;
             this.verificarLogin();
             this.platform.ready().then(function () {
-              _this.statusBar.styleDefault();
+              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                  while (1) {
+                    switch (_context.prev = _context.next) {
+                      case 0:
+                        this.statusBar.styleDefault();
+                        this.requestPermission();
+
+                      case 2:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }
+                }, _callee, this);
+              }));
+            });
+          }
+        }, {
+          key: "requestPermission",
+          value: function requestPermission() {
+            var _this2 = this;
+
+            console.log("ENTRA");
+            this.messagingService.requestPermission().subscribe(function (token) {
+              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                  while (1) {
+                    switch (_context2.prev = _context2.next) {
+                      case 0:
+                        this.listenForMessages();
+
+                      case 1:
+                      case "end":
+                        return _context2.stop();
+                    }
+                  }
+                }, _callee2, this);
+              }));
+            }, function (err) {
+              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this2, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                var alert;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                  while (1) {
+                    switch (_context3.prev = _context3.next) {
+                      case 0:
+                        _context3.next = 2;
+                        return this.alertController.create({
+                          header: 'Error',
+                          message: err,
+                          buttons: ['OK']
+                        });
+
+                      case 2:
+                        alert = _context3.sent;
+                        _context3.next = 5;
+                        return alert.present();
+
+                      case 5:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }
+                }, _callee3, this);
+              }));
+            });
+          }
+        }, {
+          key: "listenForMessages",
+          value: function listenForMessages() {
+            var _this3 = this;
+
+            this.messagingService.getMessages().subscribe(function (msg) {
+              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                var alert;
+                return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                  while (1) {
+                    switch (_context4.prev = _context4.next) {
+                      case 0:
+                        _context4.next = 2;
+                        return this.alertController.create({
+                          header: msg.notification.title,
+                          subHeader: msg.notification.body,
+                          message: msg.data.info,
+                          buttons: ['OK']
+                        });
+
+                      case 2:
+                        alert = _context4.sent;
+                        _context4.next = 5;
+                        return alert.present();
+
+                      case 5:
+                      case "end":
+                        return _context4.stop();
+                    }
+                  }
+                }, _callee4, this);
+              }));
             });
           }
         }, {
@@ -500,31 +605,29 @@
         }, {
           key: "verificarLogin",
           value: function verificarLogin() {
-            var _this2 = this;
+            var _this4 = this;
 
             this.storage.get("id").then(function (value) {
-              console.log("LENGTH: ", value);
-
               if (value != null) {
-                _this2.id_User = value;
+                _this4.id_User = value;
                 console.log("HABILITADO");
 
-                _this2.habilitarOpciones();
+                _this4.habilitarOpciones();
               }
             });
           }
         }, {
           key: "alertLogin",
           value: function alertLogin() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var _this3 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var _this5 = this;
 
               var alert;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context.prev = _context.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
-                      _context.next = 2;
+                      _context5.next = 2;
                       return this.alertController.create({
                         header: 'Para continuar regístrese o inicie sesión',
                         message: '¿Desea registrarse o iniciar sesión?',
@@ -532,27 +635,27 @@
                         buttons: [{
                           text: 'NO',
                           handler: function handler() {
-                            _this3.router.navigate(["/educ/home/"]);
+                            _this5.router.navigate(["/educ/home/"]);
                           }
                         }, {
                           text: 'SI',
                           handler: function handler() {
-                            _this3.router.navigate(["/login"]);
+                            _this5.router.navigate(["/login"]);
                           }
                         }]
                       });
 
                     case 2:
-                      alert = _context.sent;
-                      _context.next = 5;
+                      alert = _context5.sent;
+                      _context5.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context.stop();
+                      return _context5.stop();
                   }
                 }
-              }, _callee, this);
+              }, _callee5, this);
             }));
           }
         }, {
@@ -607,6 +710,8 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"]
         }, {
           type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"]
+        }, {
+          type: _app_services_messaging_service__WEBPACK_IMPORTED_MODULE_7__["MessagingService"]
         }];
       };
 
@@ -731,6 +836,18 @@
       var _tabs_tabs_page__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ./tabs/tabs.page */
       "./src/app/tabs/tabs.page.ts");
+      /* harmony import */
+
+
+      var _angular_service_worker__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! @angular/service-worker */
+      "./node_modules/@angular/service-worker/__ivy_ngcc__/fesm2015/service-worker.js");
+      /* harmony import */
+
+
+      var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      /*! @angular/fire/messaging */
+      "./node_modules/@angular/fire/__ivy_ngcc__/messaging/es2015/index.js");
 
       var AppModule = function AppModule() {
         _classCallCheck(this, AppModule);
@@ -739,13 +856,104 @@
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
         entryComponents: [],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_10__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_12__["firebaseConfig"]), _angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__["AngularFireAuthModule"]],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_10__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_12__["firebaseConfig"]), _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_16__["AngularFireMessagingModule"], _angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__["AngularFireAuthModule"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_15__["ServiceWorkerModule"].register('combined-sw.js', {
+          enabled: true
+        })],
         providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_11__["GooglePlus"], _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_13__["Facebook"], _tabs_tabs_page__WEBPACK_IMPORTED_MODULE_14__["TabsPage"], {
           provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
           useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
         }],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
       })], AppModule);
+      /***/
+    },
+
+    /***/
+    "./src/app/services/messaging.service.ts":
+    /*!***********************************************!*\
+      !*** ./src/app/services/messaging.service.ts ***!
+      \***********************************************/
+
+    /*! exports provided: MessagingService */
+
+    /***/
+    function srcAppServicesMessagingServiceTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "MessagingService", function () {
+        return MessagingService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/fire/messaging */
+      "./node_modules/@angular/fire/__ivy_ngcc__/messaging/es2015/index.js");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! rxjs/operators */
+      "./node_modules/rxjs/_esm2015/operators/index.js");
+
+      var MessagingService = /*#__PURE__*/function () {
+        function MessagingService(afMessaging) {
+          _classCallCheck(this, MessagingService);
+
+          this.afMessaging = afMessaging;
+          this.token = null;
+        }
+
+        _createClass(MessagingService, [{
+          key: "requestPermission",
+          value: function requestPermission() {
+            return this.afMessaging.requestToken.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (token) {
+              console.log('Store token to server: ', token);
+            }));
+          }
+        }, {
+          key: "getMessages",
+          value: function getMessages() {
+            return this.afMessaging.messages;
+          }
+        }, {
+          key: "deleteToken",
+          value: function deleteToken() {
+            if (this.token) {
+              this.afMessaging.deleteToken(this.token);
+              this.token = null;
+            }
+          }
+        }]);
+
+        return MessagingService;
+      }();
+
+      MessagingService.ctorParameters = function () {
+        return [{
+          type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__["AngularFireMessaging"]
+        }];
+      };
+
+      MessagingService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], MessagingService);
       /***/
     },
 
@@ -837,15 +1045,15 @@
         }, {
           key: "alertLogin",
           value: function alertLogin() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this4 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              var _this6 = this;
 
               var alert;
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
-                  switch (_context2.prev = _context2.next) {
+                  switch (_context6.prev = _context6.next) {
                     case 0:
-                      _context2.next = 2;
+                      _context6.next = 2;
                       return this.alertController.create({
                         header: 'Para continuar regístrese o inicie sesión',
                         message: '¿Desea registrarse o iniciar sesión?',
@@ -853,27 +1061,27 @@
                         buttons: [{
                           text: 'NO',
                           handler: function handler() {
-                            _this4.router.navigate(["/educ/home/"]);
+                            _this6.router.navigate(["/educ/home/"]);
                           }
                         }, {
                           text: 'SI',
                           handler: function handler() {
-                            _this4.router.navigate(["/login"]);
+                            _this6.router.navigate(["/login"]);
                           }
                         }]
                       });
 
                     case 2:
-                      alert = _context2.sent;
-                      _context2.next = 5;
+                      alert = _context6.sent;
+                      _context6.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context2.stop();
+                      return _context6.stop();
                   }
                 }
-              }, _callee2, this);
+              }, _callee6, this);
             }));
           }
         }]);
@@ -944,7 +1152,8 @@
         storageBucket: "prueba-63695.appspot.com",
         messagingSenderId: "44397923925",
         appId: "1:44397923925:web:a304015d46d02b59bdcedc",
-        measurementId: "G-GS6NW3RMT5"
+        measurementId: "G-GS6NW3RMT5",
+        vapidKey: "BNV21GYfyf6yQ2vOhqWIHwc9GuNO0iRsYxzMBiVfHbTMeRQsekEcRbuH3Res0qy3hNN35u-tDnXlj3Bhc_Orhqc"
       };
       /*
        * For easier debugging in development mode, you can import the following file

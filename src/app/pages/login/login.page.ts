@@ -9,6 +9,7 @@ import { AppComponent } from "../../app.component";
 import * as $ from "jquery";
 import { AlertController } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
+import { MessagingService } from '../../services/messaging.service';
 
 @Component({
   selector: 'app-login',
@@ -18,10 +19,10 @@ import { environment } from '../../../environments/environment';
 
 export class LoginPage implements OnInit {
   loading: any;
-  public id_user: string;
-  private email: string = "";
-  private pass: string = "";
-  private showpassword: boolean;
+  id_user: string;
+  email: string = "";
+  pass: string = "";
+  showpassword: boolean;
   constructor(
     private router: Router,
     private platform: Platform,
@@ -29,7 +30,8 @@ export class LoginPage implements OnInit {
     private fireAuth: AngularFireAuth,
     private fb: Facebook,
     private App: AppComponent,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private messagingService: MessagingService
   ) {
 
   }
@@ -53,13 +55,41 @@ export class LoginPage implements OnInit {
         self.App.storage.set("user", data.correo);
         self.App.storage.set("pass", data.clave);
         self.App.storage.set("id", user.id);
-        self.App.storage.get("id").then((value) => {
-          console.log(value);
-        })
+        self.requestPermission(user.id);
       }
       else {
         self.alertError(user.mensaje, "Credenciales incorrectas");
       }
+    });
+  }
+
+  requestPermission(id_User:string) {
+    this.messagingService.requestPermission(id_User).subscribe(
+      async token => {
+          this.listenForMessages();
+      },
+      async (err) => {
+        const alert = await this.alertController.create({
+          header: 'Error',
+          message: err,
+          buttons: ['OK'],
+        });
+ 
+        await alert.present();
+      }
+    );
+  }
+
+ listenForMessages() {
+    this.messagingService.getMessages().subscribe(async (msg: any) => {
+      const alert = await this.alertController.create({
+        header: msg.notification.title,
+        subHeader: msg.notification.body,
+        message: msg.data.info,
+        buttons: ['OK'],
+      });
+ 
+      await alert.present();
     });
   }
 

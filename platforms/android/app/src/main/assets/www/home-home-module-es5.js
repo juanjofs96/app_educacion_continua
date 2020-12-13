@@ -1,8 +1,4 @@
 (function () {
-  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["home-home-module"], {
@@ -210,22 +206,26 @@
       var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/core */
       "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
 
-      var HomePage = /*#__PURE__*/function () {
-        function HomePage() {
-          _classCallCheck(this, HomePage);
-        }
 
-        _createClass(HomePage, [{
-          key: "ngOnInit",
-          value: function ngOnInit() {}
-        }]);
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 
-        return HomePage;
-      }();
+      var HomePage = function HomePage(alertCtrl, toastCtrl) {
+        _classCallCheck(this, HomePage);
+
+        this.alertCtrl = alertCtrl;
+        this.toastCtrl = toastCtrl; //this.listenForMessages();
+      };
 
       HomePage.ctorParameters = function () {
-        return [];
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
+        }];
       };
 
       HomePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

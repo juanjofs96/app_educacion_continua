@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: "http://157.230.227.213"
+  url: "https://educontinua.cf"
 };
 
 
@@ -16,7 +16,8 @@ export const firebaseConfig = {
   storageBucket: "prueba-63695.appspot.com",
   messagingSenderId: "44397923925",
   appId: "1:44397923925:web:a304015d46d02b59bdcedc",
-  measurementId: "G-GS6NW3RMT5"
+  measurementId: "G-GS6NW3RMT5",
+  vapidKey:"BNV21GYfyf6yQ2vOhqWIHwc9GuNO0iRsYxzMBiVfHbTMeRQsekEcRbuH3Res0qy3hNN35u-tDnXlj3Bhc_Orhqc"
 }
 
 /*

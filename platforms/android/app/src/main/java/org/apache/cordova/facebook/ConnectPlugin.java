@@ -53,7 +53,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import com.facebook.login.LoginBehavior;
 
 public class ConnectPlugin extends CordovaPlugin {
 
@@ -661,7 +660,7 @@ public class ConnectPlugin extends CordovaPlugin {
         if (!hasAccessToken()) {
             // Set up the activity result callback to this class
             cordova.setActivityResultCallback(this);
-            LoginManager.getInstance().setLoginBehavior(LoginBehavior.WEB_ONLY);
+
             // Create the request
             LoginManager.getInstance().logInWithReadPermissions(cordova.getActivity(), permissions);
             return;

@@ -394,6 +394,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+/* harmony import */ var _app_services_messaging_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app/services/messaging.service */ "./src/app/services/messaging.service.ts");
+
 
 
 
@@ -403,7 +405,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(alertController, router, platform, splashScreen, statusBar, menu, s) {
+    constructor(alertController, router, platform, splashScreen, statusBar, menu, s, messagingService) {
         this.alertController = alertController;
         this.router = router;
         this.platform = platform;
@@ -411,6 +413,8 @@ let AppComponent = class AppComponent {
         this.statusBar = statusBar;
         this.menu = menu;
         this.s = s;
+        this.messagingService = messagingService;
+        this.pushes = [];
         this.listMenu = [{ item: "Curso Aprobados", disable: true }, { item: "Descargar Diplomas", disable: true }, { item: "Sugerencias y Reclamos", disable: true },
             { item: "Contáctanos", disable: false }, { item: "Perfil", disable: true }];
         this.listTabs = [{ item: "Home", disable: false, tab: "home", icon: "home" }, { item: "Mis Cursos", disable: true, tab: "cursos", icon: "school" },
@@ -423,9 +427,34 @@ let AppComponent = class AppComponent {
     initializeApp() {
         this.estadoUser = false;
         this.verificarLogin();
-        this.platform.ready().then(() => {
+        this.platform.ready().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.statusBar.styleDefault();
-        });
+            this.requestPermission();
+        }));
+    }
+    requestPermission() {
+        console.log("ENTRA");
+        this.messagingService.requestPermission().subscribe((token) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.listenForMessages();
+        }), (err) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Error',
+                message: err,
+                buttons: ['OK'],
+            });
+            yield alert.present();
+        }));
+    }
+    listenForMessages() {
+        this.messagingService.getMessages().subscribe((msg) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: msg.notification.title,
+                subHeader: msg.notification.body,
+                message: msg.data.info,
+                buttons: ['OK'],
+            });
+            yield alert.present();
+        }));
     }
     verificar(index) {
         if (this.listMenu[index].disable) {
@@ -447,7 +476,6 @@ let AppComponent = class AppComponent {
     }
     verificarLogin() {
         this.storage.get("id").then((value) => {
-            console.log("LENGTH: ", value);
             if (value != null) {
                 this.id_User = value;
                 console.log("HABILITADO");
@@ -505,7 +533,8 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"] },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"] }
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"] },
+    { type: _app_services_messaging_service__WEBPACK_IMPORTED_MODULE_7__["MessagingService"] }
 ];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -545,6 +574,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
 /* harmony import */ var _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/facebook/ngx */ "./node_modules/@ionic-native/facebook/__ivy_ngcc__/ngx/index.js");
 /* harmony import */ var _tabs_tabs_page__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./tabs/tabs.page */ "./src/app/tabs/tabs.page.ts");
+/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/__ivy_ngcc__/fesm2015/service-worker.js");
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/messaging/es2015/index.js");
+
+
 
 
 
@@ -568,7 +601,11 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
             _angular_fire__WEBPACK_IMPORTED_MODULE_10__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_12__["firebaseConfig"]),
-            _angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__["AngularFireAuthModule"]],
+            _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_16__["AngularFireMessagingModule"],
+            _angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__["AngularFireAuthModule"],
+            _angular_service_worker__WEBPACK_IMPORTED_MODULE_15__["ServiceWorkerModule"].register('combined-sw.js', {
+                enabled: true,
+            })],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
@@ -580,6 +617,57 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })
 ], AppModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/messaging.service.ts":
+/*!***********************************************!*\
+  !*** ./src/app/services/messaging.service.ts ***!
+  \***********************************************/
+/*! exports provided: MessagingService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessagingService", function() { return MessagingService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/messaging */ "./node_modules/@angular/fire/__ivy_ngcc__/messaging/es2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+
+
+
+
+let MessagingService = class MessagingService {
+    constructor(afMessaging) {
+        this.afMessaging = afMessaging;
+        this.token = null;
+    }
+    requestPermission() {
+        return this.afMessaging.requestToken.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(token => {
+            console.log('Store token to server: ', token);
+        }));
+    }
+    getMessages() {
+        return this.afMessaging.messages;
+    }
+    deleteToken() {
+        if (this.token) {
+            this.afMessaging.deleteToken(this.token);
+            this.token = null;
+        }
+    }
+};
+MessagingService.ctorParameters = () => [
+    { type: _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_2__["AngularFireMessaging"] }
+];
+MessagingService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], MessagingService);
 
 
 
@@ -690,7 +778,8 @@ const firebaseConfig = {
     storageBucket: "prueba-63695.appspot.com",
     messagingSenderId: "44397923925",
     appId: "1:44397923925:web:a304015d46d02b59bdcedc",
-    measurementId: "G-GS6NW3RMT5"
+    measurementId: "G-GS6NW3RMT5",
+    vapidKey: "BNV21GYfyf6yQ2vOhqWIHwc9GuNO0iRsYxzMBiVfHbTMeRQsekEcRbuH3Res0qy3hNN35u-tDnXlj3Bhc_Orhqc"
 };
 /*
  * For easier debugging in development mode, you can import the following file

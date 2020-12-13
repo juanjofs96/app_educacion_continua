@@ -38,18 +38,8 @@ const routes: Routes = [
       {
         path: 'sugerencias',
         loadChildren: () => import('../sugerencias/sugerencias.module').then(m => m.SugerenciasPageModule)
-      },
-      {
-        path: '',
-        redirectTo: '/educ/home',
-        pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/educ/home',
-    pathMatch: 'full'
   }
 ];
 

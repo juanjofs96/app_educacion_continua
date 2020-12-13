@@ -8,20 +8,26 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { firebaseConfig } from '../environments/environment';
+import { firebaseConfig, environment } from '../environments/environment';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { TabsPage } from './tabs/tabs.page';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule],
+    AngularFireMessagingModule,
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('combined-sw.js', {
+      enabled: true,
+    })],
+    
   providers: [
     StatusBar,
     SplashScreen,

@@ -10,10 +10,12 @@ import { AppComponent } from "../app.component";
 })
 
 export class TabsPage {
-  private listTabs: any;
+  listTabs: any;
+  num_notificaciones:number;
   constructor(private alertController: AlertController,
     private router: Router, private App: AppComponent) {
     this.listTabs = this.App.listTabs;
+    this.num_notificaciones=0;
   }
 
   verificar(index: number) {

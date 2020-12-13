@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class CursosPage {
 
-  private listCursos = []
+  listCursos = []
   constructor(private App: AppComponent, private alertController: AlertController,private router:Router) {
     
   }

@@ -5,6 +5,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { MenuController, AlertController, Platform } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { MessagingService } from '../app/services/messaging.service';
+
 
 @Component({
   selector: 'app-root',
@@ -14,15 +16,16 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AppComponent {
-  public listMenu = [{ item: "Curso Aprobados", disable: true }, { item: "Descargar Diplomas", disable: true }, { item: "Sugerencias y Reclamos", disable: true },
+  pushes: any = [];
+  listMenu = [{ item: "Curso Aprobados", disable: true }, { item: "Descargar Diplomas", disable: true }, { item: "Sugerencias y Reclamos", disable: true },
   { item: "Contáctanos", disable: false }, { item: "Perfil", disable: true }];
-  public listTabs = [{ item: "Home", disable: false, tab: "home", icon: "home" }, { item: "Mis Cursos", disable: true, tab: "cursos", icon: "school" },
+  listTabs = [{ item: "Home", disable: false, tab: "home", icon: "home" }, { item: "Mis Cursos", disable: true, tab: "cursos", icon: "school" },
   { item: "Notificaciones", disable: true, tab: "notificaciones", icon: "notifications" },
   { item: "Encuestas", disable: true, tab: "encuestas", icon: "bar-chart" }];
-  public estadoUser: boolean;
-  public id_User: string;
-  private permitido: boolean;
-  public storage:Storage;
+  estadoUser: boolean;
+  id_User: string;
+  permitido: boolean;
+  storage: Storage;
   constructor(
     private alertController: AlertController,
     private router: Router,
@@ -30,18 +33,52 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private menu: MenuController,
-    private s:Storage
+    private s: Storage,
+    private messagingService: MessagingService
   ) {
-    this.storage=s;
+    this.storage = s;
     this.permitido = true;
+    
     this.initializeApp();
   }
+  
+
 
   initializeApp() {
     this.estadoUser = false;
-    this.verificarLogin();
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
+      this.verificarLogin();
+    });
+  }
+
+  requestPermission() {
+    this.messagingService.requestPermission(this.id_User).subscribe(
+      async token => {
+          this.listenForMessages();
+      },
+      async (err) => {
+        const alert = await this.alertController.create({
+          header: 'Error',
+          message: err,
+          buttons: ['OK'],
+        });
+ 
+        await alert.present();
+      }
+    );
+  }
+
+ listenForMessages() {
+    this.messagingService.getMessages().subscribe(async (msg: any) => {
+      const alert = await this.alertController.create({
+        header: msg.notification.title,
+        subHeader: msg.notification.body,
+        message: msg.data.info,
+        buttons: ['OK'],
+      });
+ 
+      await alert.present();
     });
   }
 
@@ -66,13 +103,13 @@ export class AppComponent {
     }
   }
 
-    verificarLogin() {
+  verificarLogin() {
     this.storage.get("id").then((value) => {
       if (value != null) {
         this.id_User = value;
         console.log("HABILITADO");
         this.habilitarOpciones();
-
+        this.requestPermission();
       }
     })
   }
@@ -96,7 +133,7 @@ export class AppComponent {
   }
 
   salir() {
-    this.storage.set("id",null);
+    this.storage.set("id", null);
     this.router.navigate(["/login"]);
     this.estadoUser = false;
     this.id_User = null;
@@ -111,7 +148,7 @@ export class AppComponent {
 
   }
 
-  
+
   habilitarOpciones() {
     this.estadoUser = true;
     for (let i = 0; i < this.listMenu.length; i++) {
@@ -121,7 +158,7 @@ export class AppComponent {
     for (let i = 0; i < this.listTabs.length; i++) {
       this.listTabs[i].disable = false;
     }
-    this.router.navigate(["/educ/home/"]);
+    //this.router.navigate(["/educ/home/"]);
   }
 
 }

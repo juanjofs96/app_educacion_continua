@@ -11,11 +11,11 @@ import { environment } from '../../environments/environment';
 })
 export class SugerenciasPage implements OnInit {
 
-  private mensaje: string;
-  private asunto: string;
-  private data: FormData;
-  private file: any;
-  private showLoader: boolean;
+  mensaje: string;
+  asunto: string;
+  data: FormData;
+  file: any;
+  showLoader: boolean;
   constructor(private App: AppComponent, private alertController: AlertController) {
     this.mensaje = "";
     this.asunto = "";

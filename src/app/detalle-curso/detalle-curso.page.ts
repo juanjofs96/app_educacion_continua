@@ -43,12 +43,12 @@ const data_asistencias_line = {
   styleUrls: ['./detalle-curso.page.scss'],
 })
 export class DetalleCursoPage{
-  private chart_asistencias: any;
-  private chart_calificaciones: any;
-  private chart_asistencias_line: any;
-  private detalles: any = "";
-  private mostrarAsistencia: boolean;
-  private mostrarCalificaciones: boolean;
+  chart_asistencias: any;
+  chart_calificaciones: any;
+  chart_asistencias_line: any;
+  detalles: any = "";
+   mostrarAsistencia: boolean;
+  mostrarCalificaciones: boolean;
 
   constructor(private router: ActivatedRoute,private App: AppComponent) {
     this.chart_asistencias = data_asistencias;

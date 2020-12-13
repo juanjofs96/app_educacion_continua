@@ -1,3 +1,4 @@
+
 <ion-content padding='true'>
   <div class="vertical-center">
     <img src="assets/images/LogoCEC.png" class="smallLogo" />
@@ -8,32 +9,32 @@
     <ion-list>
       <ion-item>
         <ion-label required position="stacked">N° Cédula</ion-label>
-        <ion-input [(ngModel)]="id" name="id" autocomplete="off" type="text"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
+        <ion-input id="cedula" [(ngModel)]="id" name="id"  type="text"><ion-icon name="finger-print-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label required position="stacked">Nombres</ion-label>
-        <ion-input [(ngModel)]="name" name="nombre" autocomplete="off" type="text"><ion-icon name="person-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="name" name="nombre" type="text"><ion-icon name="person-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label required position="stacked">Apellidos</ion-label>
-        <ion-input [(ngModel)]="apellidos" autocomplete="off" name="apellidos" type="text"><ion-icon name="people-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="apellidos"  name="apellidos" type="text"><ion-icon name="people-outline"></ion-icon></ion-input>
       </ion-item>
       
       <ion-item>
         <ion-label required position="stacked">Correo electrónico</ion-label>
-        <ion-input [(ngModel)]="email" autocomplete="off" name="email" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="email"  name="email" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Correo alternativo</ion-label>
-        <ion-input [(ngModel)]="email2" autocomplete="off" name="email2" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="email2"  name="email2" type="email"><ion-icon name="mail-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Dirección</ion-label>
-        <ion-input [(ngModel)]="direccion" autocomplete="off" name="direccion" type="text"><ion-icon name="globe-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="direccion"  name="direccion" type="text"><ion-icon name="globe-outline"></ion-icon></ion-input>
       </ion-item>
 
       <ion-item *ngIf="showpassword">
@@ -62,7 +63,7 @@
 
       <ion-item>
         <ion-label position="stacked">N° Celular</ion-label>
-        <ion-input [(ngModel)]="celular" autocomplete="off" name="celular" type="text"><ion-icon name="call-outline"></ion-icon></ion-input>
+        <ion-input [(ngModel)]="celular" name="celular" type="text"><ion-icon name="call-outline"></ion-icon></ion-input>
       </ion-item>
       <ion-item>
       <ion-label position="stacked">Género</ion-label>

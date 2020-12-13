@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class NotificacionesPage{
 
-  private listNotificaciones = []
+  listNotificaciones = []
   constructor(private App: AppComponent, private alertController: AlertController, private router: Router) { }
 
 
@@ -75,8 +75,6 @@ export class NotificacionesPage{
     });
 
   }
-
-
 
   async alertDetalle(index) {
     const alert = await this.alertController.create({
