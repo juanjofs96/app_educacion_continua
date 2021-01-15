@@ -1,0 +1,86 @@
+<ion-toolbar class="toolhead">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Perfil</ion-title>
+</ion-toolbar>
+
+<ion-content>
+  <div class="editar" color="primary">
+    <ion-button (click)="editar()"> Editar Perfil</ion-button>
+  </div>
+
+  <div class="avatar">
+    <ion-avatar class="avatar" slot="start">
+      <ion-img [src]="imagen"></ion-img>
+    </ion-avatar>
+  </div>
+
+  <ion-item>
+    <ion-label required position="stacked">Foto de Perfil</ion-label>
+    <ion-input type="file" disabled={{activo}} class="form-control input-lg" accept="image/*"
+      (change)="uploadImage($event)" name="imagen"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label required position="stacked">Nombres</ion-label>
+    <ion-input [(ngModel)]="nombres" name="nombre" type="text" disabled={{activo}}>
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label required position="stacked">Apellidos</ion-label>
+    <ion-input [(ngModel)]="apellidos" name="apellidos" type="text" disabled={{activo}}>
+      <ion-icon name="people-outline"></ion-icon>
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label required position="stacked">Correo electrónico</ion-label>
+    <ion-input [(ngModel)]="correo" name="email" type="email" disabled={{activo}}>
+      <ion-icon name="mail-outline"></ion-icon>
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Dirección</ion-label>
+    <ion-input [(ngModel)]="direccion" name="direccion" type="text" disabled={{activo}}>
+      <ion-icon name="globe-outline"></ion-icon>
+    </ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="showpassword">
+    <ion-label position="stacked">Contraseña</ion-label>
+    <ion-icon slot="end" color="primary" name="eye" (click)="togglePasswordText()"></ion-icon>
+    <ion-input [(ngModel)]="clave" type="text" required disabled={{activo}}></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="!showpassword">
+    <ion-label position="stacked">Contraseña</ion-label>
+    <ion-input [(ngModel)]="clave" type="password" required disabled={{activo}}></ion-input>
+    <ion-icon slot="end" color="medium" name="eye-off" (click)="togglePasswordText()"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">N° Celular</ion-label>
+    <ion-input [(ngModel)]="celular" name="celular" type="text" disabled={{activo}}>
+      <ion-icon name="call-outline"></ion-icon>
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Género</ion-label>
+    <ion-select [(ngModel)]="genero" placeholder="Seleccione su género" interface="popover" name="genero"
+      disabled={{activo}}>
+      <ion-select-option value="M">Masculino</ion-select-option>
+      <ion-select-option value="F">Femenino</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div class="botones">
+    <ion-progress-bar [type]="'indeterminate'" *ngIf="showLoader"></ion-progress-bar>
+    <ion-button expand="block" share="round" color="primary" class="ion-padding-horizontal" (click)="actualizar()">
+      Actualizar</ion-button>
+    <!--ion-button expand="block" share="round" color="danger" class="ion-padding-horizontal" (click)="eliminar()">Eliminar
+      Cuenta</ion-button-->
+
+  </div>
+
+</ion-content>

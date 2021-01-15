@@ -17,8 +17,8 @@ import { MessagingService } from '../app/services/messaging.service';
 @Injectable()
 export class AppComponent {
   pushes: any = [];
-  listMenu = [{ item: "Curso Aprobados", disable: true }, { item: "Descargar Diplomas", disable: true }, { item: "Sugerencias y Reclamos", disable: true },
-  { item: "Contáctanos", disable: false }, { item: "Perfil", disable: true }];
+  listMenu = [{ item: "Descargar Diplomas", disable: true }, { item: "Sugerencias y Reclamos", disable: true },
+  { item: "Contáctanos", disable: false },{ item: "Tips y Recomendaciones", disable: true },{ item: "Perfil", disable: true }];
   listTabs = [{ item: "Home", disable: false, tab: "home", icon: "home" }, { item: "Mis Cursos", disable: true, tab: "cursos", icon: "school" },
   { item: "Notificaciones", disable: true, tab: "notificaciones", icon: "notifications" },
   { item: "Encuestas", disable: true, tab: "encuestas", icon: "bar-chart" }];
@@ -93,21 +93,30 @@ export class AppComponent {
     }
 
     if (index == 3 && this.permitido) {
+      this.router.navigate(["educ/tips/"]);
+      this.menu.close();
+    }
+
+    if (index == 4 && this.permitido) {
+      this.router.navigate(["educ/perfil/"]);
+      this.menu.close();
+    }
+
+    if (index == 2 && this.permitido) {
       this.router.navigate(["educ/contacto/"]);
       this.menu.close();
-
     }
-    if (index == 2 && this.permitido) {
+    if (index == 1 && this.permitido) {
       this.router.navigate(["educ/sugerencias/"]);
       this.menu.close();
     }
+
   }
 
   verificarLogin() {
     this.storage.get("id").then((value) => {
       if (value != null) {
         this.id_User = value;
-        console.log("HABILITADO");
         this.habilitarOpciones();
         this.requestPermission();
       }
@@ -145,7 +154,6 @@ export class AppComponent {
     for (let i = 0; i < this.listTabs.length; i++) {
       i == 0 ? this.listTabs[i].disable = false : this.listTabs[i].disable = true;
     }
-
   }
 
 
@@ -158,7 +166,6 @@ export class AppComponent {
     for (let i = 0; i < this.listTabs.length; i++) {
       this.listTabs[i].disable = false;
     }
-    //this.router.navigate(["/educ/home/"]);
   }
 
 }

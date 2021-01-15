@@ -20,7 +20,18 @@ const routes: Routes = [
         {
           path: ':id_curso',
           loadChildren: () => import('../detalle-curso/detalle-curso.module').then(m => m.DetalleCursoPageModule)
-        }]
+        },
+      ]
+
+      },
+      {
+        path: 'areas',
+        children: [
+        {
+          path: ':id_area',
+          loadChildren: () => import('../cursos/cursos.module').then(m => m.CursosPageModule),
+        },
+      ]
 
       },
       {
@@ -38,6 +49,14 @@ const routes: Routes = [
       {
         path: 'sugerencias',
         loadChildren: () => import('../sugerencias/sugerencias.module').then(m => m.SugerenciasPageModule)
+      },
+      {
+        path: 'tips',
+        loadChildren: () => import('../tips/tips.module').then( m => m.TipsPageModule)
+      },
+      {
+        path: 'perfil',
+        loadChildren: () => import('../perfil/perfil.module').then(m => m.PerfilPageModule)
       }
     ]
   }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import * as $ from "jquery";
 import { AppComponent } from '../app.component';
 import { AlertController } from '@ionic/angular';
-import { Router} from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -12,18 +12,23 @@ import { environment } from '../../environments/environment';
 })
 export class CursosPage {
 
+  isDisabled:boolean;
   listCursos = []
-  constructor(private App: AppComponent, private alertController: AlertController,private router:Router) {
+  constructor(private App: AppComponent, private alertController: AlertController,private router: ActivatedRoute) {
     
   }
 
   ionViewDidEnter() {
     this.listCursos = []
-    
+    console.log(this.App.id_User)
     if (this.App.id_User != null) {
       this.getCursos();
     }
-   
+   else{
+    this.router.params.subscribe(param => {
+      this.getCursosAreas(param['id_area']);
+      })
+   }
   }
   
   async getCursos() {
@@ -38,6 +43,21 @@ export class CursosPage {
       }
       else{
         self.alertCurso();
+      }
+    })
+  }
+
+  async getCursosAreas(id_area) {
+    var data = {"id_area":id_area}
+    var self=this;
+    await $.post(environment.url +"/api/areas_eventos/",data).done(function (res) {
+      if(!res.error){
+      self.listCursos=res.cursos
+      
+      console.log(self.listCursos)
+      for (let i = 0; i < self.listCursos.length; i++) {
+        self.listCursos[i].imagen = environment.url + self.listCursos[i].imagen
+      }
       }
     })
   }

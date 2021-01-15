@@ -43,6 +43,14 @@ const routes: Routes = [
   {
     path: 'sugerencias',
     loadChildren: () => import('./sugerencias/sugerencias.module').then( m => m.SugerenciasPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'tips',
+    loadChildren: () => import('./tips/tips.module').then( m => m.TipsPageModule)
   }
 ];
 @NgModule({

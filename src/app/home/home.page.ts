@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import * as $ from "jquery";
+import { environment } from '../../environments/environment';
  
 @Component({
   selector: 'app-home',
@@ -8,53 +9,33 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class HomePage {
  
+  listAreas=[];
+  listSlides=[];
   constructor(
-    private alertCtrl: AlertController,
-    private toastCtrl: ToastController
   ) {
-    //this.listenForMessages();
-  }
- /*
-  listenForMessages() {
-    this.messagingService.getMessages().subscribe(async (msg: any) => {
-      const alert = await this.alertCtrl.create({
-        header: msg.notification.title,
-        subHeader: msg.notification.body,
-        message: msg.data.info,
-        buttons: ['OK'],
-      });
- 
-      await alert.present();
-    });
+    
   }
  
-  requestPermission() {
-    this.messagingService.requestPermission().subscribe(
-      async token => {
-        const toast = await this.toastCtrl.create({
-          message: 'Got your token',
-          duration: 2000
-        });
-        toast.present();
-      },
-      async (err) => {
-        const alert = await this.alertCtrl.create({
-          header: 'Error',
-          message: err,
-          buttons: ['OK'],
-        });
- 
-        await alert.present();
+  ionViewDidEnter() {
+    this.listAreas = []
+    this.listSlides=[];
+    this.getAreas();
+  }
+
+  async getAreas(){
+    var self=this;
+  await $.get(environment.url + "/api/areas/").done(function (areas) {
+    if (!areas.error) {
+      self.listAreas = areas.areas
+      for (let i = 0; i < self.listAreas.length; i++) {
+        self.listAreas[i].imagen = environment.url + self.listAreas[i].imagen
       }
-    );
-  }
- 
-  async deleteToken() {
-    this.messagingService.deleteToken();
-    const toast = await this.toastCtrl.create({
-      message: 'Token removed',
-      duration: 2000
-    });
-    toast.present();
-  }*/
+    }
+
+  })
+}
+
+cursos(id){
+
+}
 }

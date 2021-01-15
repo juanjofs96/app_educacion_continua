@@ -1,0 +1,16 @@
+<ion-toolbar class="toolhead">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Tips y Recomendaciones</ion-title>
+</ion-toolbar>
+
+
+<ion-content>
+<div class="tips">
+<ion-img class="imagen" [src]="imagen"></ion-img>
+<p *ngFor="let list of listTips" >{{list}}</p>
+</div>
+
+
+</ion-content>

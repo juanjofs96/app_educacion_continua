@@ -3,10 +3,31 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Home</ion-title>    
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <img src="assets/images/home.png" />
+  <!--img src="assets/images/home.png" /-->
+
+  <div class="areas">
+    <div class="header-areas">
+      <h3>ÁREAS</h3>
+    </div>
+    <ion-slides>
+      <ion-slide *ngFor="let list of listAreas">
+        <ion-card class="card_areas" [routerLink]="['/educ/areas',list.id]">
+          <div>
+            <ion-img class="imagen" [src]="list.imagen"></ion-img>
+          </div>
+          <ion-card-header>
+            <div class="titulo">
+              <ion-text>{{list.area}}</ion-text>
+            </div>
+          </ion-card-header>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { AppComponent } from '../app.component';
 import * as $ from "jquery";
@@ -50,7 +50,7 @@ export class DetalleCursoPage{
    mostrarAsistencia: boolean;
   mostrarCalificaciones: boolean;
 
-  constructor(private router: ActivatedRoute,private App: AppComponent) {
+  constructor(private router: ActivatedRoute,private App: AppComponent,private router2: Router) {
     this.chart_asistencias = data_asistencias;
     this.chart_calificaciones = data_calificaciones;
     this.chart_asistencias_line = data_asistencias_line;
@@ -60,9 +60,11 @@ export class DetalleCursoPage{
   ionViewDidEnter() {
     this.mostrarAsistencia = true;
     this.mostrarCalificaciones = false;
-    this.router.params.subscribe(param => {
-    this.getDetalle(param['id_curso']);
-    })
+    if(this.App.id_User!=null){
+      this.router.params.subscribe(param => {
+        this.getDetalle(param['id_curso']);
+        })
+    }
   }
 
   async getDetalle(codigo_evento:any) {
